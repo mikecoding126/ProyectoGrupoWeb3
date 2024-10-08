@@ -1,7 +1,7 @@
 <?php
     require 'includes/config/database.php';
     $db = conectarDB();
-
+    //Funciones
     $errores=[];
     $cont = 0;
     if($_SERVER['REQUEST_METHOD']=='POST'){
