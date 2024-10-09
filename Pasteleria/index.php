@@ -28,7 +28,7 @@
 ?>
 
 <section class="banner" class="container-fluid p-0">
-    <div class="banner-img" style="position:relative; background:url('images/slider-image3.avif') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
+    <div class="banner-img" style="position:relative; background:url('images/fondo1.jpg') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
         <div class="banner-text" style="position:absolute; top:50% ;left:50%; transform: translate(-50%,-50%);text-align:center; color:#fff;">
             <h1>LA PASTELERIA ESENCIA</h1>
             <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>

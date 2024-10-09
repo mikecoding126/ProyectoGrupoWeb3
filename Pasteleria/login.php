@@ -19,7 +19,7 @@
             if($res -> num_rows){
                 echo "uno";
                 $usuario = mysqli_fetch_array($res);
-                $auth = password_verify($p,$usuario['pasword']);
+                $auth = password_verify($p,$usuario['password']);
                 if($auth){
                     session_start();
                     $_SESSION['usuario']=$usuario['email'];
