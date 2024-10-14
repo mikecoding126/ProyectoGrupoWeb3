@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@700&family=Mulish:wght@400;700&display=swap"
         rel="stylesheet">
-    <title>Acerca de Nosotros -Pastelería Esencia </title>
+    <title>Pastelería El Collita</title>
    
          <link rel="stylesheet" href="build\css\stylesn.css">
          <link rel="stylesheet" href="build\css\app.css">
