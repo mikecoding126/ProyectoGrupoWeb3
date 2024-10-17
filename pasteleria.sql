@@ -41,12 +41,12 @@ CREATE TABLE `contacto` (
 --
 
 INSERT INTO `contacto` (`id`, `nombre`, `apellido`, `correo`, `telefono`, `mensaje`) VALUES
-(1, 'daniel', 'montes', 'hola@gmail.com', 666555442, 'muy rico pero quisiera mas variedad'),
-(2, 'ana', 'martines', 'ana@gmail.com', 665544321, 'cuando traen tortas heladas'),
-(3, 'juan', 'montes', 'dasd@gmail.com', 1232465, 'mas donas'),
-(4, 'JUAN', 'quispe', 'juan@gmail.com', 666555442, 'hola'),
-(5, 'maria', 'nuñes', 'maria@gmail.com', 6064177, 'holas marias'),
-(6, 'Victor', 'Fernandez', 'victor@gmail.com', 8594821, 'rico');
+(1, 'daniel', 'montes', 'hola@gmail.com', 666555442, 'Bastante bueno'),
+(2, 'ana', 'martines', 'ana@gmail.com', 665544321, 'vamos'),
+(3, 'juan', 'montes', 'dasd@gmail.com', 1232465, 'La calidad es aceptable'),
+(4, 'JUAN', 'quispe', 'juan@gmail.com', 666555442, 'xd'),
+(5, 'maria', 'nuñes', 'maria@gmail.com', 6064177, 'tremendo'),
+(6, 'Victor', 'Fernandez', 'victor@gmail.com', 8594821, 'La variedad esta bien');
 
 -- --------------------------------------------------------
 
@@ -168,9 +168,7 @@ CREATE TABLE `promociones` (
   `estado` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Volcado de datos para la tabla `promociones`
---
+
 
 INSERT INTO `promociones` (`codPromocion`, `imagen`, `nombre`, `descripcion`, `precio`, `estado`) VALUES
 (1, 'cunape.jpg', 'Cuñape', 'Deliciosos cuñapes por unidad.', 6, 'Disponible'),
