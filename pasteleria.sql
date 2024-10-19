@@ -171,18 +171,13 @@ CREATE TABLE `promociones` (
 
 
 INSERT INTO `promociones` (`codPromocion`, `imagen`, `nombre`, `descripcion`, `precio`, `estado`) VALUES
-(1, 'cunape.jpg', 'Cuñape', 'Deliciosos cuñapes por unidad.', 6, 'Disponible'),
-(2, 'Empanada-de-queso.jpg', 'Empanadas de Queso', 'Deliciosas Empanadas de Queso por unidad.', 6, 'Disponible'),
-(3, 'Empanada-de-carne.jpg', 'Empanadas de Carne', 'Deliciosas Empanadas de Carne por unidad.', 6, 'Disponible'),
-(4, 'Party-Pack-Mediano.jpeg', 'Party Pack Mediano', '24 salados, Cuñape, empanada grande de pollo, queso y carne, 1 gaseosa de 2 ltrs.', 154, 'Disponible'),
-(5, 'TORTA-PASION.jpg', 'Torta Pasión', 'Torta con masa de vainilla y masa de chocolate con relleno de crema de chocolate y crema de frutilla.', 99, 'Disponible'),
-(6, 'Empanada-pollo-mediana.jpg', 'Empanadas de Pollo Medianas', 'Deliciosas Empanadas de Pollo Medianas por unidad.', 6, 'Disponible'),
-(7, 'Party-Pack-Pequeño.jpeg', 'Party Pack Pequeño', '9 salados, Cuñape, empanada grande de pollo, queso y carne.', 54, 'Disponible'),
-(8, 'Combo-Cafe-Americano.png', 'Combo Personal Café Americano', '1 Café Americano de 12 oz., 1 Empanada de Queso, 1 Cuñape.', 24, 'Disponible'),
-(9, 'Combo-Cafe-Latte.png', 'Combo Personal Café Latte', '1 Café Latte de 12 oz., 1 Empanada de Queso, 1 Cuñape.', 24, 'Disponible'),
-(10, 'Combo-Mocochinchi.png', 'Combo Personal Mocochinchi', ' 1 Vaso de Mocochinchi, 1 Empanada de Queso, 1 Cuñape.', 20, 'Agotado'),
-(11, 'TORTA-FELICIDAD.jpg', 'Torta Felicidad', 'Masa de vainilla, crema de frutilla, mermelada de frutilla, crema de durazno y mermelada de durazno.', 99, 'Disponible');
-
+(1, 'galleta.jpg', 'Galleta Hallowen', 'Deliciosas galletas por unidad .', 2, 'Disponible'),
+(2, 'galleta2.jpg', 'galletas Personalizadas', 'Galletas de Todos los Santos por unidad.', 2, 'Disponible'),
+(3, 'pastel1.jpg', 'Rebanada de Pastel', 'Rebanada de pastel .', 5, 'Disponible'),
+(4, 'empanada1.jpg', 'empanada de Manjar', 'Deliciosa empanada de manjar por unidad', 3, 'Disponible'),
+(5, 'empanada2.jpg', 'Empanada de carne', 'Deliciosa empanada de Carne por unidad', 3, 'Disponible'),
+(6, 'empanada3.jpg', 'Empanadas de Queso', 'Deliciosas Empanadas de Queso Economicas por unidad.',2 , 'Disponible'),
+(7, 'torta.jpg', 'torta MIni', 'Torta mini sencilla ',15 , 'Disponible');
 -- --------------------------------------------------------
 
 --
