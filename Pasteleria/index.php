@@ -30,7 +30,7 @@
 <section class="banner" class="container-fluid p-0">
     <div class="banner-img" style="position:relative; background:url('images/fondo1.jpg') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
         <div class="banner-text" style="position:absolute; top:50% ;left:50%; transform: translate(-50%,-50%);text-align:center; color:#fff;">
-            <h1>LA PASTELERIA ESENCIA</h1>
+            <h1>La Pastelería Collita</h1>
             <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
             <a href="productos.php" class="btn  btn-primary">Ver menú</a>
         </div>
@@ -92,43 +92,6 @@
             <a href="productos.php" class="btn btn-primary btn-lg">Ver más</a>
         </div>
     </section>
-<section id="testimonio" class="bg-light py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Testimonios</h2>
-            <div class="row">
-                <div class="col-md-6 d-flex">
-                    <div class="card mb-4 w-100">
-                        <div class="card-body">
-                            <p class="card-text">"¡La  Pastelería Esencia es simplemente increíble! Sus pasteles son una obra de arte tanto visual como gustativa. Cada bocado es una explosión de sabores deliciosos y frescos. Recientemente compré una tarta para el cumpleaños de mi hijo y fue un gran éxito. Todos los invitados quedaron impresionados por lo exquisito que estaba. ¡Definitivamente recomendaría esta pastelería a cualquiera que busque postres de alta calidad y servicio excepcional!"</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Ana Lopez
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 d-flex">
-                    <div class="card mb-4 w-100">
-                        <div class="card-body">
-                            <p class="card-text">"Desde que descubrí la Pastelería Esencia, se ha convertido en mi lugar favorito para satisfacer mi antojo de dulces. Sus croissants son simplemente los mejores que he probado, con una textura increíblemente hojaldrada y un sabor inigualable. Además, sus macarons son una verdadera delicia, con una amplia variedad de sabores que siempre me hacen volver por más. El personal es amable y siempre dispuesto a recomendarte algo delicioso. ¡No puedo esperar para probar más de sus delicias en el futuro!"</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Carlos Jimenes
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center my-4">
-            <a href="testimonios.php" class="btn btn-primary btn-lg">Ver más</a>
-        </div>
-            </div>
-        </div>
-    </section>
-
-
-    
-
-  
-
 <?php
     incluirTemplate("footer");
 ?>

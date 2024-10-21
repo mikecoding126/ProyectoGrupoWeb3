@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@700&family=Mulish:wght@400;700&display=swap"
         rel="stylesheet">
-    <title>Acerca de Nosotros -Pastelería Esencia </title>
+    <title>Acerca de Nosotros -Pastelería Collita </title>
     <link rel="stylesheet" href="build\css\stylesn.css"> 
     
 </head>
@@ -31,7 +31,7 @@
     <main class="contenedor seccion">
         <h1>Acerca de Nosotros</h1>
 
-        <p class="descripcion">Nuestra deliciosa historia nace el año 1975 en lo que solía ser el pueblo pequeño de Santa Cruz, Bolivia. Con mucho cariño y buen gusto, Maria y Christian Jessen, fusionaron los gustos cruceños con los de su hogar, Austria. Valorando la tradición y el sabor del arte de la pastelería, Fridolin se convirtió en la cadena pastelera más grande de nuestro país. Ahora Fridolin sigue enamorando a la ciudad con un sinfín de variedades de tortas, postres, y saladitos bolivianos.</p>
+        <p class="descripcion">Nuestra deliciosa historia nace el año 1975 en lo que solía ser el pueblo pequeño de Santa Cruz, Bolivia. Con mucho cariño y buen gusto, Carla y Fernando, fusionaron los gustos cruceños con los de su hogar, Austria. Valorando la tradición y el sabor del arte de la pastelería, Fridolin se convirtió en la cadena pastelera más grande de nuestro país. Ahora Fridolin sigue enamorando a la ciudad con un sinfín de variedades de tortas, postres, y saladitos bolivianos.</p>
 
         <h2>Nuestros Valores</h2>
 

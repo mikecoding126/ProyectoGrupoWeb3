@@ -76,7 +76,7 @@ incluirTemplate('headerAdmin');
 </style>
 
 <main class="contenedor seccion">
-    <h1 class="titulo-admin">Administrador Pastelería Esencia</h1>
+    <h1 class="titulo-admin">Administrador Pastelería Collita</h1>
     <div class="botones-admin">
         <a href="productos/listado.php" class="boton boton-verde">Productos</a>
         <a href="promociones/listado.php" class="boton boton-amarillo">Promociones</a>
