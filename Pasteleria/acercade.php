@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,6 +19,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@700&family=Mulish:wght@400;700&display=swap"
         rel="stylesheet">
     <title>Acerca de Nosotros -Pastelería Collita </title>
+=======
+
+    <title>Acerca de Nosotros -Pastelería Esencia </title>
+>>>>>>> 39cedfcf7a009f6952b57451e55183b99e32255f
     <link rel="stylesheet" href="build\css\stylesn.css"> 
     
 </head>

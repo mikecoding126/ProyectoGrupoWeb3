@@ -28,9 +28,15 @@
 ?>
 
 <section class="banner" class="container-fluid p-0">
+<<<<<<< HEAD
     <div class="banner-img" style="position:relative; background:url('images/fondo1.jpg') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
         <div class="banner-text" style="position:absolute; top:50% ;left:50%; transform: translate(-50%,-50%);text-align:center; color:#fff;">
             <h1>La Pastelería Collita</h1>
+=======
+    <div class="banner-img" style="position:relative; background:url('images/fondo.jpg') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
+        <div class="banner-text" style="position:absolute; top:70% ;left:50%; transform: translate(-50%,-50%);text-align:center; color:black;">
+            <h1>LA PASTELERIA ESENCIA</h1>
+>>>>>>> 39cedfcf7a009f6952b57451e55183b99e32255f
             <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
             <a href="productos.php" class="btn  btn-primary">Ver menú</a>
         </div>

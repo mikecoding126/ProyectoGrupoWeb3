@@ -44,8 +44,8 @@
 
         <div class="informacion-contacto background-image">
             <h3>Contactanos</h3>
-            <p><i class="fas fa-map-marker-alt"></i>23. calle falsa 75012</p>
-            <p><i class="fas fa-envelope"></i> luca@turilli.it</p>
+            <p><i class="fas fa-map-marker-alt"></i>23. calle Murillo 75012</p>
+            <p><i class="fas fa-envelope"></i> PateleriaCollita@info.bo</p>
             <p><i class="fas fa-phone-alt"></i>+591 66554433</p>
             <div class="redes-sociales">
                 <i class="fab fa-facebook-square"></i>
@@ -92,7 +92,7 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
               <div class="col">
                  <div class="card">
-                  <img src="images/galleta.jpg" class="card-img-top" alt="...">
+                  <img src="images/seguro.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">¿Es seguro comprar online?</h5>
             <p class="card-text">–Nuestra Tienda Virtual posee una encriptación de 256 bit, comprar aquí es más que seguro.</p>
@@ -101,7 +101,7 @@
       </div>
       <div class="col">
         <div class="card">
-          <img src="images/helado1.jpg" class="card-img-top" alt="...">
+          <img src="images/regalo.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">¿Puedo enviar un pedido como regalo?</h5>
             <p class="card-text">-Así es, al finalizar la compra, tendrás la opción de mandar tu pedido como regalo, ingresando una dedicatoria.</p>
@@ -110,7 +110,7 @@
       </div>
       <div class="col">
         <div class="card">
-          <img src="images/helado2.jpg" class="card-img-top" alt="...">
+          <img src="images/programar.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">¿Puedo programar la entrega de un pedido?</h5>
             <p class="card-text">–Claro que sí, al finalizar la compra, podrás elegir la fecha y hora aproximada para recibir o mandar tu pedido.</p>
@@ -119,7 +119,7 @@
       </div>
       <div class="col">
         <div class="card" >
-          <img src="images/galleta3.jpg" class="card-img-top" alt="..."  >
+          <img src="images/suscri.jpg" class="card-img-top" alt="..."  >
           <div class="card-body">
             <h5 class="card-title">¿Cómo puedo enterarme de las ofertas?</h5>
             <p class="card-text">–Para enterarte de nuestras ofertas, promociones y cupones de descuento, suscribíte a nuestro newsletter al final de cada página.
