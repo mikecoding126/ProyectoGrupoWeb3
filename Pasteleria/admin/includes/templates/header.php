@@ -1,5 +1,5 @@
 <header>
-    <!-- Bootstrap CSS v5.2.1 -->
+    
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -12,10 +12,12 @@
          crossorigin="anonymous" 
          referrerpolicy="no-referrer" />
          
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container" >
 
-                <a class="navbar-brand" href="index.php"><i class="fas fa_utesils" ></i> 🍰 Pastelería Esencia</a>
+                <a class="navbar-brand" href="../../index.php"><i class="fas fa_utesils" ></i> 
+                <img src="./logo.png" alt="Logo de collita" width="auto" style="max-width: 70px; height: auto;">Pastelería El Collita    cvx🍰</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav " aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,11 +49,8 @@
                     <a class="nav-link" href="contacto.php">Contactos</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="testimonios.php">Testimonios</a>
-                    </li>
-                    <li class="nav-item">
                     <a class="nav-link" href="carrito.php">
-                        <i class="fas fa-shopping-cart"></i> Carrito
+                        <i class="fas fa-shopping-cart"></i>Carrito
                         <?php
                         // Contar productos en el carrito
                         $total_items = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
@@ -61,9 +60,13 @@
                         ?>
                     </a>
                 </li>
+                    <?php if($auth):?>
+                                <li><a class="nav-link" href="cerrarsesion2.php">Cerrar Sesión</a></li>
+                            <?php else: ?>
+                                <li><a class="nav-link" href="login.php">Iniciar Sesión</a> </li>
+                                <?php endif;?>
                     </ul>
                 </div>
            </div>
         </nav>
 </header>
-

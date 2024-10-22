@@ -1,7 +1,7 @@
 <?php
 
 require '../../includes/funciones.php';
-incluirTemplate('headerAdmin');
+incluirTemplate('header');
 ?>
 <style>
     body {

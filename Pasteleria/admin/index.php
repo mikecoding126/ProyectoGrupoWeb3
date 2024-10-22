@@ -1,11 +1,12 @@
 <?php 
-    session_start();
+    /* session_start();
+    
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria_2do");
-    }
+    }*/
 require '../includes/funciones.php';
-incluirTemplate('headerAdmin');
+incluirTemplate('HeaderAdmin');
 ?>
 
 <style>
@@ -73,16 +74,41 @@ incluirTemplate('headerAdmin');
     .boton-amarillo:hover {
         background-color: #e0a800;
     }
+    .boton-azul {
+    background-color: #007BFF; /* Azul */
+    color: white;
+}
+
+.boton-verde {
+    background-color: #28A745; /* Verde */
+    color: white;
+}
+
+.boton-rojo {
+    background-color: #DC3545; /* Rojo */
+    color: white;
+}
+
+.boton-naranja {
+    background-color: #FFA500; /* Naranja */
+    color: white;
+}
+
+.boton-morado {
+    background-color: #6F42C1; /* Morado */
+    color: white;
+}
 </style>
 
 <main class="contenedor seccion">
     <h1 class="titulo-admin">Administrador Pastelería Collita</h1>
     <div class="botones-admin">
-        <a href="productos/listado.php" class="boton boton-verde">Productos</a>
-        <a href="promociones/listado.php" class="boton boton-amarillo">Promociones</a>
-        <a href="vista/usuarioLista.php" class="boton boton-verde">Usuario</a>
-        <a href="vista/adminLista.php" class="boton boton-verde">Administradores</a>
-        <a href="proveedor/listado.php" class="boton boton-amarillo">Proveedores</a>
+    
+        <a href="./productos/listado.php" class="boton boton-verde">Productos</a>
+        <a href="./promociones/listado.php" class="boton boton-morado">Promociones</a>
+        <a href="./vista/usuarioLista.php" class="boton boton-naranja">Usuario</a>
+        <a href="./vista/adminLista.php" class="boton boton-rojo">Administradores</a>
+        <a href="./proveedor/listado.php" class="boton boton-azul">Proveedores</a>
 
         
     </div>

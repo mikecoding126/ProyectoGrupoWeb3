@@ -1,9 +1,9 @@
 <?php
-    if(!isset($_SESSION)){
+    /*if(!isset($_SESSION)){
         session_start();
     }
     $auth=$_SESSION['login']??false;
-    //var_dump($auth);
+    //var_dump($auth);*/
 ?>
 <header>
     <!-- Bootstrap CSS v5.2.1 -->
@@ -19,10 +19,10 @@
          crossorigin="anonymous" 
          referrerpolicy="no-referrer" />
          
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
             <div class="container">
 
-                <a class="navbar-brand" href="index.php"><i class="fas fa_utesils" ></i> 🍰 Pastelería Esencia</a>
+                <a class="navbar-brand" href="index.php"><i class="fas fa_utesils" ></i> 🍰 Pastelería Collita</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav " aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -54,8 +54,7 @@
                     <a class="nav-link" href="../contacto.php">Contactos</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="../testimonios.php">Testimonios</a>
-                    </li>
+                  
                     <li class="nav-item">
                     <a class="nav-link" href="../carrito.php">
                         <i class="fas fa-shopping-cart"></i> Carrito
@@ -68,11 +67,11 @@
                         ?>
                     </a>
                 </li>
-                    <?php if($auth):?>
+                    <?php /*if($auth):?>
                                 <li><a class="nav-link" href="cerrarsesion1.php">Cerrar Sesión</a></li>
                             <?php else: ?>
                                 <li><a class="nav-link" href="login.php">Iniciar Sesión</a> </li>
-                                <?php endif;?>
+                                <?php endif;*/?>
                     </ul>
                 </div>
            </div>

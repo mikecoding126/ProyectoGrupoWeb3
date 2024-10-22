@@ -27,77 +27,91 @@
     incluirTemplate('header');
 ?>
 
-<section class="banner" class="container-fluid p-0">
-<<<<<<< HEAD
-    <div class="banner-img" style="position:relative; background:url('images/fondo1.jpg') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
-        <div class="banner-text" style="position:absolute; top:50% ;left:50%; transform: translate(-50%,-50%);text-align:center; color:#fff;">
-            <h1>La Pastelería Collita</h1>
-=======
-    <div class="banner-img" style="position:relative; background:url('images/fondo.jpg') center/cover no-repeat; height:400px;" onmousemove="parallax(event)">
-        <div class="banner-text" style="position:absolute; top:70% ;left:50%; transform: translate(-50%,-50%);text-align:center; color:black;">
-            <h1>LA PASTELERIA Collita</h1>
->>>>>>> 39cedfcf7a009f6952b57451e55183b99e32255f
-            <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
-            <a href="productos.php" class="btn  btn-primary">Ver menú</a>
+<section class="banner container-fluid p-0">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height:400px;">
+        <div class="carousel-inner" style="height:100%;">
+            <div class="carousel-item active" style="height:100%; background:url('images/fondo.jpg') center/cover no-repeat;">
+                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;">
+                    <h1>LA PASTELERIA Collita</h1>
+                    <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
+                    <a href="productos.php" class="btn btn-primary">Ver menú</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="height:100%; background:url('images/fondo2.jpg') center/cover no-repeat;">
+                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;">
+                    <h1>LA PASTELERIA Collita</h1>
+                    <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
+                    <a href="productos.php" class="btn btn-primary">Ver menú</a>
+                </div>
+            </div>
+            <div class="carousel-item" style="height:100%; background:url('images/fondo3.jpg') center/cover no-repeat;">
+                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;">
+                    <h1>LA PASTELERIA Collita</h1>
+                    <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
+                    <a href="productos.php" class="btn btn-primary">Ver menú</a>
+                </div>
+            </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </section>
 
+<?php
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "pasteleria"; 
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+$conn->set_charset("utf8");
+?>
+   <div style="padding: 70px; padding-top: 10px; padding-bottom: 10px;">
+        <h1 class="my-4">Los más vendidos</h1>
+    </div>
+    
+    <div class="container text-center">
+    <div class="row align-items-center">
+        <?php
 
-<section id="Recomendacion" class="container mt-4">
-        <h2 class="text-center">NUESTROS PRODUCTOS</h2>
-        <br>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col d-flex">
-                <div class="card h-100">
-                <source srcset="img/Torta-Rosa.png" type="image/jpeg">
-                    <img loading="lazy" src="img/Torta-Rosa.png" alt="producto">
-                    <div class="card-body">
-                        <h5 class="card-title">Torta Rosa Coffe Caramel 12 pers.</h5>
-                        <p class="card-text small"><strong>Ingredientes: </strong>Masa de café, crema pastelera con espresso, Masa de chocolate , brigadeiro de vainilla con hilos de toffee salado, torta humectada con café latte.</p>
-                        <p class="card-text"><strong>Precio: </strong>Bs.165.00</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col d-flex">
-                <div class="card h-100">
-                <source srcset="img/Torta-Pasion.png" type="image/jpeg">
-                    <img loading="lazy" src="img/Torta-Pasion.png" alt="producto">
-                    <div class="card-body">
-                        <h5 class="card-title">Torta Pasión 12 pers.</h5>
-                        <p class="card-text small"><strong>Ingredientes: </strong>Torta con masa de vainilla y masa de chocolate con relleno de crema de chocolate y crema de frutilla.</p>
-                        <p class="card-text"><strong>Precio: </strong>Bs.99.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex">
-                <div class="card h-100">
-                <source srcset="img/Torta-Oreo.png" type="image/jpeg">
-                    <img loading="lazy" src="img/Torta-Oreo.png" alt="producto">
-                    <div class="card-body">
-                        <h5 class="card-title">Torta Oreo 12 pers.</h5>
-                        <p class="card-text small"><strong>Ingredientes: </strong>¡Llegó abril y con él, la torta de tus sueños! 🎉🍰 Presentamos la increíble TORTA OREO: una masa de chocolate irresistible, rellena de la más suave crema de Oreo, capas de Oreos enteras, bañada en un delicado merengue italiano y un sedoso ganache de chocolate. Para rematar, ¡más Oreos decorando su corona! 😍🍫</p>
-                        <p class="card-text"><strong>Precio: </strong>Bs.165.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col d-flex">
-                <div class="card h-100">
-                <source srcset="img/Rosa-Negra.jpg" type="image/jpeg">
-                    <img loading="lazy" src="img/Rosa-Negra.jpg" alt="producto">
-                    <div class="card-body">
-                        <h5 class="card-title">Torta Rosa Negra 12 pers.</h5>
-                        <p class="card-text small"><strong>Ingredientes: </strong>Esponjosa masa de chocolate, rellena con 3 capas de budín de chocolate, decorada con finos pétalos de chocolate que asemejan a una rosa. Para 12 personas.</p>
-                        <p class="card-text"><strong>Precio: </strong>Bs.175.00</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center my-4">
-            <a href="productos.php" class="btn btn-primary btn-lg">Ver más</a>
-        </div>
-    </section>
+        $sql = "SELECT * FROM productos2 LIMIT 8";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $nombre = $row['nombre'];
+                $descripcion = $row['descripcion'];
+                $imagen = $row['imagen'];
+                echo '<div class="col-md-3">';
+                echo '<div class="card m-2" style="width: 18rem;">';
+                echo '<img src="'.$imagen.'" class="card-img-top" alt="'.$nombre.'">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">'.$nombre.'</h5>';
+                echo '<p class="card-text">'.$descripcion.'</p>';
+                echo '<a href="productos.php?id='.$row['id'].'" class="btn btn-success">Ver más</a>';
+                ?>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</button>
+                <?php
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo 'No se encontraron productos.';
+        }
+        $result->free_result();
+        ?>
+    </div>
+</div>
+
+
 <?php
     incluirTemplate("footer");
 ?>

@@ -110,19 +110,17 @@ INSERT INTO `pedidos` (`idPedido`, `nombre`, `direccion`, `telefono`, `comentari
 --
 
 CREATE TABLE `productos` (
-  `codProducto` int(11) NOT NULL,
+  `codProducto` int(11) NOT NULL AUTO_INCREMENT,  -- Añadí AUTO_INCREMENT
   `imagen` varchar(100) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` longtext NOT NULL,
   `precio` decimal(10,0) NOT NULL,
   `estado` varchar(45) NOT NULL,
-  `idProv` int(11) NOT NULL
+  `idProv` int(11) NOT NULL,
+  PRIMARY KEY (`codProducto`)  -- Definí la clave primaria
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
 -- Volcado de datos para la tabla `productos`
---
-
 INSERT INTO `productos` (`codProducto`, `imagen`, `nombre`, `descripcion`, `precio`, `estado`, `idProv`) VALUES
 (1, 'Tarta-CremaCafe.png', 'Tarta Crema Café', 'Base de café con crema pastelera infusionada en espresso, capas de bizcocho de chocolate con un toque de vainilla y decorada con caramelo salado y un suave glaseado de latte.', 170, 'Disponible', 23),
 (2, 'Tarta-VainillaChoco.png', 'Tarta Vainilla-Choco', 'Bizcocho de vainilla entrelazado con capas de chocolate, relleno de crema de frutilla y cubierto con una delicada capa de ganache de chocolate.', 102, 'Disponible', 23),
@@ -150,7 +148,7 @@ INSERT INTO `productos` (`codProducto`, `imagen`, `nombre`, `descripcion`, `prec
 (24, 'Mini-TartaletaLimon.png', 'Mini Tartaleta de Limón', 'Tartaleta individual con base de masa quebrada y relleno de crema de limón, decorada con merengue.', 25, 'Disponible', 50),
 (25, 'Mini-TartaletaFrutosRojos.png', 'Mini Tartaleta de Frutos Rojos', 'Base de masa quebrada con crema pastelera y decorada con una mezcla de frutos rojos frescos.', 28, 'Disponible', 45),
 (26, 'Tarta-AlmendraChoco.png', 'Tarta de Almendra y Chocolate', 'Bizcocho de almendra con capas de crema de chocolate y decorada con almendras caramelizadas.', 170, 'Disponible', 15),
-(27, 'Tarta-TresLeches.png', 'Tarta Tres Leches', 'Bizcocho esponjoso empapado en una mezcla de tres leches, cubierto con crema batida y decorado con canela en polvo.', 160, 'Disponible', 30),
+(27, 'Tarta-TresLeches.png', 'Tarta Tres Leches', 'Bizcocho esponjoso empapado en una mezcla de tres leches, cubierto con crema batida y decorado con canela en polvo.', 160, 'Disponible', 30);
 
 
 -- --------------------------------------------------------
@@ -179,6 +177,43 @@ INSERT INTO `promociones` (`codPromocion`, `imagen`, `nombre`, `descripcion`, `p
 (6, 'empanada3.jpg', 'Empanadas de Queso', 'Deliciosas Empanadas de Queso Economicas por unidad.',2 , 'Disponible'),
 (7, 'torta.jpg', 'torta MIni', 'Torta mini sencilla ',15 , 'Disponible');
 -- --------------------------------------------------------
+--
+-- Estructura de tabla para la tabla `productos2`
+--
+
+CREATE TABLE `productos2` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `precio` decimal(10,2) NOT NULL,
+  `categoria` varchar(100) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos2` (`id`, `nombre`, `descripcion`, `precio`, `categoria`, `cantidad`, `imagen`) VALUES
+(1, 'Pastel de Chocolate', 'Delicioso pastel de chocolate con glaseado suave', 25.99, 'Pasteles', 10, 'img/pastel_chocolate.jpg'),
+(2, 'Galletas de Avena y Pasas', 'Galletas crujientes de avena con pasas jugosas', 8.99, 'Galletas', 20, 'img/galletas_avena.jpg'),
+(3, 'Tarta de Frutas', 'Tarta fresca con una mezcla de frutas de temporada', 32.50, 'Tartas', 5, 'img/tarta_frutas.jpg'),
+(4, 'Cupcake de Fresa', 'Delicioso cupcake de fresa con frosting de crema', 4.50, 'Cupcakes', 8, 'img/cupcake_fresa.jpg'),
+(5, 'Berlin', 'Clásico berlin relleno de crema pastelera y cubierto de azúcar glas', 4.99, 'Panes Dulces', 12, 'img/berlin.jpg'),
+(6, 'Pastel de Vainilla', 'Suave pastel de vainilla con decoración de crema', 22.99, 'Pasteles', 15, 'img/pastel_vainilla.jpg'),
+(7, 'Pastel de Fresa', 'Delicioso pastel de fresa con decoración de crema', 29.99, 'Pasteles', 10, 'img/pastel_fresa.jpg'),
+(8, 'Galletas de Mantequilla', 'Deliciosas galletas de mantequilla con un toque de vainilla', 9.99, 'Galletas', 25, 'img/galletas_mantequilla.jpg'),
+(9, 'Galletas de chocolate', 'Deliciosas galletas de chocolate', 2.99, 'Galletas', 10, 'img/galletas_choco.jpg'),
+(10, 'Pastel de Zanahoria', 'Delicioso pastel de zanahoria con crema de queso', 27.99, 'Pasteles', 8, 'img/pastel_zanahoria.jpg'),
+(11, 'Galletas de Chocolate Blanco', 'Galletas crujientes con trozos de chocolate blanco', 8.99, 'Galletas', 18, 'img/galletas_chocolate_blanco.jpg'),
+(12, 'Rosquillas de Canela', 'Rosquillas esponjosas con sabor a canela y cubiertas de azúcar', 3.99, 'Panes Dulces', 20, 'img/rosquillas_canela.jpg'),
+(13, 'Cupcake de Vainilla', 'Delicioso cupcake de vainilla con frosting de buttercream', 4.50, 'Cupcakes', 10, 'img/cupcake_vainilla.jpg'),
+(14, 'Tarta de Manzana', 'Tarta clásica de manzana con crujiente de canela', 29.50, 'Tartas', 5, 'img/tarta_manzana.jpg'),
+(15, 'Galletas de M&M', 'Galletas repletas de coloridos M&M para los amantes del chocolate', 9.99, 'Galletas', 22, 'img/galletas_mm.jpg'),
+(16, 'Pan de Plátano', 'Pan esponjoso con sabor a plátano y nueces troceadas', 7.99, 'Panes Dulces', 15, 'img/pan_platano.jpg'),
+(17, 'Pan de Canela', 'Pan dulce de canela con un glaseado dulce por encima', 6.50, 'Panes Dulces', 10, 'img/pan_canela.jpg'),
+(18, 'Cupcake de Chocolate', 'Irresistible cupcake de chocolate con ganache de chocolate', 5.50, 'Cupcakes', 12, 'img/cupcake_chocolate.jpg');
 
 --
 -- Estructura de tabla para la tabla `proveedores`

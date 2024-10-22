@@ -10,12 +10,12 @@
     // require '../../includes/funciones.php';
     // incluirTemplate('header');
 
-    
+    /*
     session_start();
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria");
-    }
+    }*/
     require '../../includes/config/database.php';
     $db = conectarDB();
 

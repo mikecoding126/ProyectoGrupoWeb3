@@ -1,4 +1,4 @@
-<footer class="footer bg-dark text-white py-5">
+<footer class="footer bg-light bg-rose py-5 border-top border-light">
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
@@ -14,9 +14,9 @@
             <div class="col-md-4">
                 <h3>Síguenos</h3>
                 <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="text-dark"><i class="fab fa-twitter"></i></a></li>
                 </ul>
             </div>
         </div>

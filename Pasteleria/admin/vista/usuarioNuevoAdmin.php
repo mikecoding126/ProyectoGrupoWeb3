@@ -2,7 +2,7 @@
 <?php
   
   require '../../includes/funciones.php';
-  incluirTemplate('headerAdmin');
+  incluirTemplate('header');
 ?>
 
 <!DOCTYPE html>

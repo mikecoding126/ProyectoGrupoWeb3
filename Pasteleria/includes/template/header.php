@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@700&family=Mulish:wght@400;700&display=swap"
         rel="stylesheet">
-
+        
    
          <link rel="stylesheet" href="build\css\stylesn.css">
          <link rel="stylesheet" href="build\css\app.css">
@@ -43,11 +43,18 @@
         integrity="sha512-Mhn4ZHhpZ9iQV69UsVsS7K2xJfco14ZBUWD8lG8tNIm0lJctPwvmccuXkqM2nFmfT55YUyw3nSbmwEEtQ1S9sg=="
          crossorigin="anonymous" 
          referrerpolicy="no-referrer" />
-         
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-            <div class="container">
 
-                <a class="navbar-brand" href="index.php"><i class="fas fa_utesils" ></i> 🍰 Pastelería El Collita 🍰</a>
+         
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+         
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <div class="container" >
+
+                <a class="navbar-brand" href="index.php"><i class="fas fa_utesils" ></i> 
+                <img src="../Pasteleria/images/logo.png" alt="Logo de collita" width="auto" style="max-width: 70px; height: auto;">Pastelería El Collita 🍰</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav " aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -79,11 +86,8 @@
                     <a class="nav-link" href="contacto.php">Contactos</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="testimonios.php">Testimonios</a>
-                    </li>
-                    <li class="nav-item">
                     <a class="nav-link" href="carrito.php">
-                        <i class="fas fa-shopping-cart"></i> Carrito
+                        <i class="fas fa-shopping-cart"></i>Carrito
                         <?php
                         // Contar productos en el carrito
                         $total_items = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
