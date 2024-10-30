@@ -115,14 +115,14 @@
                     while($reg=$res ->fetch_assoc()){
                 ?>
                 <tr>
-                    <td><?php echo $reg['idProv']?></td>
-                    <td><?php echo $reg['nomProv']?></td>
-                    <td><?php echo $reg['telProv']?></td>
-                    <td><?php echo $reg['correoProv']?></td>
-                    <td><?php echo $reg['dirProv']?></td>
+                    <td><?php echo $reg['id']?></td>
+                    <td><?php echo $reg['nombre']?></td>
+                    <td><?php echo $reg['telefono']?></td>
+                    <td><?php echo $reg['correo']?></td>
+                    <td><?php echo $reg['direccion']?></td>
                     <td><a href=""></a></td>
-                    <td><a href="borrar.php?cod=<?php echo $reg['idProv'];?>" class="btn btn-danger">Eliminar</a></td>
-                    <td><a href="actualizar.php?cod=<?php echo $reg['idProv'];?>" class="btn btn-success">Actualizar</a></td>
+                    <td><a href="borrar.php?cod=<?php echo $reg['id'];?>" class="btn btn-danger">Eliminar</a></td>
+                    <td><a href="actualizar.php?cod=<?php echo $reg['id'];?>" class="btn btn-success">Actualizar</a></td>
                 </tr>
                 
                 <?php

@@ -1,9 +1,9 @@
 <?php
-    session_start();
+    /*session_start();
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria");
-    }
+    }*/
     require '../../includes/config/database.php';
     $db=conectarDB();
     
@@ -14,7 +14,7 @@
     <h1>Borrar</h1>
     <?php 
         $cod=$_GET['cod'];
-        $con_sql="UPDATE productos SET estado='Agotado' WHERE codProducto='$cod'";
+        $con_sql="UPDATE productos SET estado='nodisponible' WHERE codigo_producto='$cod'";
         $res=mysqli_query($db, $con_sql); 
         if ($res) {
             echo "

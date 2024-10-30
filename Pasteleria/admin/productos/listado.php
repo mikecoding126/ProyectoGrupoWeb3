@@ -102,40 +102,83 @@
         <a href="crear.php" class="btn btn-primary mb-4">Nuevo Producto</a>
         <h1 class="mb-4">Productos</h1>
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Código</th>
-                        <th>Proveedor</th>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $con_sql="SELECT p.*,v.* FROM productos p INNER JOIN proveedores v ON p.idProv=v.idProv WHERE estado='Disponible'";
-                    $res = mysqli_query($db, $con_sql);
-                    while ($reg = $res->fetch_assoc()) {
-                    ?>
-                    <tr>
-                        <td><?php echo $reg['codProducto']; ?></td>
-                        <td> <?php echo $reg['nomProv']." ".$reg['telProv']; ?>
-                        <td><img src="imagenes/<?php echo $reg['imagen']; ?>" class="img-thumbnail"></td>
-                        <td><?php echo $reg['nombre']; ?></td>
-                        <td><?php echo $reg['descripcion']; ?></td>
-                        <td class="text-warning font-weight-bold">Bs.-<?php echo $reg['precio']; ?></td>
-                        <td><a href="borrar.php?cod=<?php echo $reg['codProducto']; ?>" class="btn btn-danger btn-sm">AGOTADO</a></td>
-                        <td><a href="actualizar.php?cod=<?php echo $reg['codProducto']; ?>" class="btn btn-success btn-sm">MODIFICAR</a></td>
-                    </tr>
-                    <?php
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Código</th>
+                <th>Proveedor</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $con_sql = "SELECT 
+                p.codigo_producto,
+                p.nombre as producto_nombre,
+                p.imagen,
+                p.descripcion,
+                p.precio,
+                v.nombre as proveedor_nombre,
+                v.telefono as proveedor_telefono
+            FROM productos p 
+            INNER JOIN proveedores v ON p.proveedor_id = v.id 
+            WHERE p.estado = 'disponible'";
+
+            $res = mysqli_query($db, $con_sql);
+            if (!$res) {
+                echo '<tr><td colspan="8" class="text-center text-danger">Error al cargar los datos: ' . 
+                     htmlspecialchars(mysqli_error($db)) . '</td></tr>';
+            } else {
+                if (mysqli_num_rows($res) > 0) {
+                    while ($reg = mysqli_fetch_assoc($res)) {
+            ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($reg['codigo_producto']); ?></td>
+                            <td><?php echo htmlspecialchars($reg['proveedor_nombre']) . " - " . 
+                                     htmlspecialchars($reg['proveedor_telefono']); ?></td>
+                            <td>
+                                <?php if (!empty($reg['imagen'])): ?>
+                                    <img src="imagenes/<?php echo htmlspecialchars($reg['imagen']); ?>" 
+                                         class="img-thumbnail" 
+                                         alt="Imagen de <?php echo htmlspecialchars($reg['producto_nombre']); ?>"
+                                         style="max-width: 100px;">
+                                <?php else: ?>
+                                    <span class="text-muted">Sin imagen</span>
+                                <?php endif; ?>
+                            </td>
+                            <td><?php echo htmlspecialchars($reg['producto_nombre']); ?></td>
+                            <td><?php echo htmlspecialchars($reg['descripcion']); ?></td>
+                            <td class="text-warning font-weight-bold">
+                                Bs.- <?php echo number_format($reg['precio'], 2, ',', '.'); ?>
+                            </td>
+                            <td>
+                                <a href="borrar.php?cod=<?php echo urlencode($reg['codigo_producto']); ?>" 
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('¿Está seguro de marcar este producto como agotado?');">
+                                    <i class="fas fa-times-circle"></i> AGOTADO
+                                </a>
+                            </td>
+                            <td>
+                                <a href="actualizar.php? cod=<?php echo urlencode($reg['codigo_producto']); ?>" 
+                                   class="btn btn-success btn-sm">
+                                    <i class="fas fa-edit"></i> MODIFICAR
+                                </a>
+                            </td>
+                        </tr>
+            <?php
                     }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                } else {
+                    echo '<tr><td colspan="8" class="text-center">No hay productos promocionados disponibles</td></tr>';
+                }
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
     </main>
 
     <?php incluirTemplate('footer'); ?>

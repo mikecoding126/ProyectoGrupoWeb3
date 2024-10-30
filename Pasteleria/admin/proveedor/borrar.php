@@ -1,10 +1,10 @@
 <?php
-    session_start();
+   /* session_start();
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria");
     }
-    
+    */
     require "includes/config/database.php";
     $db = conectarDB();
 

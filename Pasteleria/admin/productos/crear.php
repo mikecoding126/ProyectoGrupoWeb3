@@ -1,9 +1,9 @@
 <?php 
-    session_start();
+   /* session_start();
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria");
-    }
+    }*/
     require '../../includes/config/database.php';
     $db = conectarDB();
 
@@ -113,8 +113,8 @@
                     $res=mysqli_query($db,$con_sql);
                     while ($reg=$res->fetch_assoc()) {
                         ?>
-                        <option value="<?php echo $reg['idProv']; ?>">
-                            <?php echo $reg['nomProv']," ", $reg['telProv']; ?>
+                        <option value="<?php echo $reg['id']; ?>">
+                            <?php echo $reg['nombre']," ", $reg['telefono']; ?>
                         </option>
                     <?php
                     }

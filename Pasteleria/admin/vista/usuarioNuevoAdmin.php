@@ -105,7 +105,7 @@
           <a href="../../login.php" class="boton boton-verde">Volver</a>
   </form>
 </main>
-<p class="footer-text">© 2024 PasteleriaEsencia.com - Todos los derechos reservados</p>
+<p class="footer-text">© 2024 PasteleriaColiita.com - Todos los derechos reservados<</p>
   </div>
 </div>
 

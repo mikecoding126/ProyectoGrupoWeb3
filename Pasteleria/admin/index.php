@@ -105,8 +105,10 @@ incluirTemplate('HeaderAdmin');
     <div class="botones-admin">
     
         <a href="./productos/listado.php" class="boton boton-verde">Productos</a>
+        
         <a href="./promociones/listado.php" class="boton boton-morado">Promociones</a>
-        <a href="./vista/usuarioLista.php" class="boton boton-naranja">Usuario</a>
+        <a href="" class="boton boton-naranja">Usuario</a>
+        
         <a href="./vista/adminLista.php" class="boton boton-rojo">Administradores</a>
         <a href="./proveedor/listado.php" class="boton boton-azul">Proveedores</a>
 

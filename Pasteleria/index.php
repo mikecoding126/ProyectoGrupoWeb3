@@ -31,21 +31,21 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height:400px;">
         <div class="carousel-inner" style="height:100%;">
             <div class="carousel-item active" style="height:100%; background:url('images/fondo.jpg') center/cover no-repeat;">
-                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;">
+                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;background-color: rgba(255, 255, 255, 0.4);">
                     <h1>LA PASTELERIA Collita</h1>
                     <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
                     <a href="productos.php" class="btn btn-primary">Ver menú</a>
                 </div>
             </div>
             <div class="carousel-item" style="height:100%; background:url('images/fondo2.jpg') center/cover no-repeat;">
-                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;">
+                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black; background-color: rgba(255, 255, 255, 0.4);">
                     <h1>LA PASTELERIA Collita</h1>
                     <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
                     <a href="productos.php" class="btn btn-primary">Ver menú</a>
                 </div>
             </div>
             <div class="carousel-item" style="height:100%; background:url('images/fondo3.jpg') center/cover no-repeat;">
-                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;">
+                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black; background-color: rgba(255, 255, 255, 0.4);">
                     <h1>LA PASTELERIA Collita</h1>
                     <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
                     <a href="productos.php" class="btn btn-primary">Ver menú</a>
@@ -64,39 +64,45 @@
 </section>
 
 <?php
+/*
 $servername = "localhost"; 
 $username = "root"; 
 $password = ""; 
-$dbname = "pasteleria"; 
+$dbname = "pasteleriac"; 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
-}
-$conn->set_charset("utf8");
+
+    }
+$conn->set_charset("utf8");*/
+require 'includes/config/database.php';
+$db = conectarDB();
 ?>
    <div style="padding: 70px; padding-top: 10px; padding-bottom: 10px;">
-        <h1 class="my-4">Los más vendidos</h1>
+        <h1 class="my-4">Los más populares</h1>
     </div>
     
     <div class="container text-center">
     <div class="row align-items-center">
-        <?php
-
-        $sql = "SELECT * FROM productos2 LIMIT 8";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $nombre = $row['nombre'];
-                $descripcion = $row['descripcion'];
-                $imagen = $row['imagen'];
-                echo '<div class="col-md-3">';
-                echo '<div class="card m-2" style="width: 18rem;">';
-                echo '<img src="'.$imagen.'" class="card-img-top" alt="'.$nombre.'">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">'.$nombre.'</h5>';
-                echo '<p class="card-text">'.$descripcion.'</p>';
-                echo '<a href="productos.php?id='.$row['id'].'" class="btn btn-success">Ver más</a>';
-                ?>
+    <?php
+$sql = "SELECT * FROM productos LIMIT 4";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $nombre = $row['nombre'];
+        $descripcion = $row['descripcion'];
+        $precio = $row['precio'];
+        $imagen = 'admin/productos/imagenes/' . $row['imagen']; // Concatenamos la ruta base
+        echo '<div class="col-md-3">';
+        echo '<div class="card m-2" style="width: 18rem;">';
+        echo '<img src="'.$imagen.'" class="card-img-top" alt="'.$nombre.'">';
+        
+        echo '<div class="card-body">';
+        echo '<h5 class="card-title">'.$nombre.'</h5>';
+        echo '<p class="card-text">'.$descripcion.'</p>';
+        echo '<p class="card-text" style="color: red; font-size: larger;">Bs. ' . $precio . '</p>';
+        echo '<a href="productos.php?id='.$row['id'].'" class="btn btn-success">Ver más</a>';
+?>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</button>
                 <?php
                 echo '</div>';
