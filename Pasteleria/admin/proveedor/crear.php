@@ -1,10 +1,18 @@
 <?php
+<<<<<<< HEAD
 /*
     session_start();
     $auth = $_SESSION['login'];*/
  /*   if(!$auth){*/
       /*  header("Location:/pasteleria");
   /*  }*/
+=======
+   /* session_start();
+    $auth = $_SESSION['login'];
+    if(!$auth){
+        header("Location:/pasteleria");
+    }*/
+>>>>>>> d710bc7ebf1e9c236021b315703fdc5fed1dbd8d
     require '../../includes/config/database.php';
     $db = conectarDB();
 

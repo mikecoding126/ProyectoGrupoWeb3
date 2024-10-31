@@ -5,7 +5,11 @@
         header("Location:/pasteleria");
     }
     */
+<<<<<<< HEAD
     require '../../includes/config/database.php';
+=======
+    require "includes/config/database.php";
+>>>>>>> d710bc7ebf1e9c236021b315703fdc5fed1dbd8d
     $db = conectarDB();
 ?>
 <main class = "contenedor seccion">

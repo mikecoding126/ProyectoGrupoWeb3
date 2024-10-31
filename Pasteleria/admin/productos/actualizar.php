@@ -1,9 +1,9 @@
 <?php
-    session_start();
+    /*session_start();
     $auth = $_SESSION['login'];
     if (!$auth) {
         header("Location:/pasteleria");
-    }
+    }*/
     require '../../includes/config/database.php';
     $db = conectarDB();
     require '../../includes/funciones.php';
@@ -27,7 +27,7 @@
         }
         $pro = $_POST['pro']; 
 
-        $con_sql = "UPDATE productos SET nombre='$nom', descripcion='$des', precio='$pre', idProv='$pro' $nuevaImagen WHERE codProducto='$cod'";
+        $con_sql = "UPDATE productos SET nombre='$nom', descripcion='$des', precio='$pre', proveedor_id='$pro' $nuevaImagen WHERE codigo_producto='$cod'";
 
         $resm = mysqli_query($db, $con_sql);
 
@@ -45,14 +45,14 @@
         }
     }
 
-    $consulta = "SELECT * FROM productos WHERE codProducto='$cod'";
+    $consulta = "SELECT * FROM productos WHERE codigo_producto='$cod'";
     $res = mysqli_query($db, $consulta);
     $fila = mysqli_fetch_array($res);
 ?>
     <main class="contenedor seccion">
         <h1>MODIFICAR PRODUCTO</h1>
         <a href="listado.php" class="btn btn-primary">Volver</a>
-        <form action="actualizar.php?cod=<?php echo $fila['codProducto']; ?>" method="post" enctype="multipart/form-data">
+        <form action="actualizar.php?cod=<?php echo $fila['codigo_producto']; ?>" method="post" enctype="multipart/form-data">
             <table class="table table-striped table-bordered table-hover">
                 <tr>
                     <td>Imagen</td>
@@ -84,10 +84,10 @@
                         $queryProveedores = "SELECT * FROM proveedores";
                         $resultProveedores = mysqli_query($db, $queryProveedores);
                         while ($rowProveedor = mysqli_fetch_assoc($resultProveedores)) {
-                            $selected = ($rowProveedor['idProv'] == $fila['idProv']) ? 'selected' : '';
+                            $selected = ($rowProveedor['id'] == $fila['id']) ? 'selected' : '';
                             ?>
-                            <option value="<?php echo $rowProveedor['idProv']; ?>" <?php echo $selected; ?>>
-                                <?php echo $rowProveedor['nomProv'] . " " . $rowProveedor['telProv']; ?>
+                            <option value="<?php echo $rowProveedor['id']; ?>" <?php echo $selected; ?>>
+                                <?php echo $rowProveedor['nombre'] . " " . $rowProveedor['telefono']; ?>
                             </option>
                             <?php
                         }

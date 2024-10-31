@@ -1,6 +1,6 @@
 <?php
     function conectarDB(){
-        $db=mysqli_connect('localhost','root','','pasteleria');
+        $db=mysqli_connect('localhost','root','','pasteleriac');
         if($db){
             echo "Se conecto";
         }

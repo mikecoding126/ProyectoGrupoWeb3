@@ -104,7 +104,7 @@ incluirTemplate('header');
         <h1 class="mb-4">Promociones</h1>
         <div class="table-responsive">
             <table class="table table-hover table-bordered">
-                <thead class="table-dark">
+                <thead class="table-light">
                     <tr>
                         <th>Código</th>
                         <th>Imagen</th>
@@ -116,19 +116,19 @@ incluirTemplate('header');
                 </thead>
                 <tbody>
                     <?php
-                    $con_sql = "SELECT * FROM promociones WHERE estado = 'Disponible'";
+                    $con_sql = "SELECT * FROM promociones WHERE estado = 'activa'";
                     $res = mysqli_query($db, $con_sql);
                     while ($reg = $res->fetch_assoc()) {
                         ?>
                         <tr>
-                            <td><?php echo $reg['codPromocion']; ?></td>
+                            <td><?php echo $reg['id']; ?></td>
                             <td><img src="imagenes/<?php echo $reg['imagen']; ?>" class="img-thumbnail"></td>
                             <td><?php echo $reg['nombre']; ?></td>
                             <td><?php echo $reg['descripcion']; ?></td>
                             <td class="text-warning font-weight-bold">Bs.-<?php echo $reg['precio']; ?></td>
-                            <td><a href="borrar.php?cod=<?php echo $reg['codPromocion']; ?>"
+                            <td><a href="borrar.php?cod=<?php echo $reg['producto_id']; ?>"
                                     class="btn btn-danger btn-sm">AGOTADO</a></td>
-                            <td><a href="actualizar.php?cod=<?php echo $reg['codPromocion']; ?>"
+                            <td><a href="actualizar.php?cod=<?php echo $reg['producto_id']; ?>"
                                     class="btn btn-success btn-sm">MODIFICAR</a></td>
                         </tr>
                         <?php
