@@ -1,14 +1,15 @@
 <?php
+/*
     session_start();
-    $auth = $_SESSION['login'];
-    if(!$auth){
-        header("Location:/pasteleria");
-    }
+    $auth = $_SESSION['login'];*/
+ /*   if(!$auth){*/
+      /*  header("Location:/pasteleria");
+  /*  }*/
     require '../../includes/config/database.php';
     $db = conectarDB();
 
     require '../../includes/funciones.php';
-    incluirTemplate('header');
+ /*   incluirTemplate('header');*/
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <title>Agregar Nuevo Producto</title>
+    <title>Agregar Nuevo Proveedor</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -86,7 +87,7 @@
 <main class="contenedor">
     <h1>Crear</h1>
     <a href="../../index.php" class="btn boton-verde mb-3">Volver</a>
-    <form method="post" action="../registrarvendedor.php" class="formulario">
+    <form action="registrarVendedor.php" method="post" class="formulario" enctype="multipart/form-data">
         <fieldset>
             <legend>Información general</legend>
             <div class="mb-3">

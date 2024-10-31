@@ -1,13 +1,12 @@
 <?php
-    session_start();
+   /* session_start();
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria");
     }
-    
-    require "includes/config/database.php";
+    */
+    require '../../includes/config/database.php';
     $db = conectarDB();
-
 ?>
 <main class = "contenedor seccion">
     <h1>Borrar</h1>
@@ -30,5 +29,5 @@
 </main>
 
 <?php
-    incluirTemplate("footer");
+  //  incluirTemplate("footer");
 ?>

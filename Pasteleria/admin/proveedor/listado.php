@@ -97,7 +97,7 @@
 <main class = "contenedor seccion">
     <h1>Listado vendedores</h1>
     <a href="../index.php" class="btn btn-primary mb-4">Volver</a>
-    <a href="crear.php/" class="btn btn-primary mb-4">Nuevo Proveedor</a>
+    <a href="crear.php" class="btn btn-primary mb-4">Nuevo Proveedor</a>
     <h3>
         <table class="table table-striped">
             <thead>

@@ -1,13 +1,14 @@
 <?php
+/*
     session_start();
     $auth = $_SESSION['login'];
     if (!$auth) {
         header("Location:/pasteleria");
-    }
+    }*/
     require '../../includes/config/database.php';
     $db = conectarDB();
     require '../../includes/funciones.php';
-    incluirTemplate('header');
+  /*  incluirTemplate('header');*/
 
     $cod = $_GET['cod'];
     if(isset($_POST['Modificar'])){
@@ -71,5 +72,5 @@
     
 </main>
 <?php
-    incluirTemplate('footer');
+  //  incluirTemplate('footer');
     ?>
