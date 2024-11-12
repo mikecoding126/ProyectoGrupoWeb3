@@ -88,45 +88,80 @@
         <form method="post" action="registrarproducto.php" class="formulario" enctype="multipart/form-data">
             <fieldset>
                 <legend>Información del Producto</legend>
-                <div class="form-group">
+                <div class="form-group mb-3">
+    <label for="cod" class="form-label">Código de producto:</label>
+    <input type="text" 
+           name="cod" 
+           id="cod" 
+           placeholder="Código del producto" 
+           class="form-control" 
+           required 
+           pattern="[A-Za-z0-9]+" 
+           title="Solo se permiten letras y números"
+           onkeyup="this.value = this.value.toUpperCase()">
+    <small class="form-text text-muted">El código debe ser único y solo puede contener letras y números</small>
+</div>
+                <div class="form-group mb-3">
+                    <label for="categoria_id" class="form-label">Categoría:</label>
+                    <select name="categoria_id" id="categoria_id" class="form-select" required>
+                        <option value="">-- Seleccione una categoría --</option>
+                        <?php
+                        $query_categorias = "SELECT * FROM categorias WHERE estado = 'activo' ORDER BY categoria";
+                        $resultado_categorias = mysqli_query($db, $query_categorias);
+                        while ($categoria = mysqli_fetch_assoc($resultado_categorias)) {
+                            echo "<option value='{$categoria['id']}'>{$categoria['categoria']}</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
                     <label for="ima" class="form-label">Imagen:</label>
-                    <input type="file" name="ima" id="ima" accept="image/jpeg, image/png, image/jpg" class="form-control-file">
+                    <input type="file" name="ima" id="ima" accept="image/jpeg, image/png, image/jpg" class="form-control" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="nom" class="form-label">Nombre:</label>
-                    <input type="text" name="nom" id="nom" placeholder="Nombre Producto" class="form-control">
+                    <input type="text" name="nom" id="nom" placeholder="Nombre Producto" class="form-control" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="des" class="form-label">Descripción:</label>
-                    <textarea name="des" id="des" cols="30" rows="10" class="form-control" placeholder="Descripción del Producto"></textarea>
+                    <textarea name="des" id="des" class="form-control" placeholder="Descripción del Producto" rows="5"></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="pre" class="form-label">Precio:</label>
-                    <input type="number" name="pre" id="pre" placeholder="Precio Producto" class="form-control">
+                    <div class="input-group">
+                        <span class="input-group-text">Bs.</span>
+                        <input type="number" name="pre" id="pre" placeholder="0.00" class="form-control" step="0.01" min="0" required>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="st" class="form-label">Stock:</label>
+                    <input type="number" name="st" id="st" placeholder="Cantidad disponible" class="form-control" min="0" required>
                 </div>
             </fieldset>
-            <fieldset>
-            <legend>Proveedor</legend>
-            <select name="pro" id="pro">
-                <?php
-                    $con_sql="SELECT * from proveedores";
-                    $res=mysqli_query($db,$con_sql);
-                    while ($reg=$res->fetch_assoc()) {
+            
+            <fieldset class="mt-4">
+                <legend>Proveedor</legend>
+                <div class="form-group mb-3">
+                    <select name="pro" id="pro" class="form-select" required>
+                        <option value="">-- Seleccione un proveedor --</option>
+                        <?php
+                        $con_sql = "SELECT * FROM proveedores WHERE estado = 'no_promocionado' ORDER BY nombre";
+                        $res = mysqli_query($db, $con_sql);
+                        while ($reg = $res->fetch_assoc()) {
+                            echo "<option value='{$reg['id']}'>";
+                            echo htmlspecialchars($reg['nombre']) . " - Tel: " . htmlspecialchars($reg['telefono']);
+                            echo "</option>";
+                        }
                         ?>
-                        <option value="<?php echo $reg['id']; ?>">
-                            <?php echo $reg['nombre']," ", $reg['telefono']; ?>
-                        </option>
-                    <?php
-                    }
-                    ?>
-            </select>
-        </fieldset>
-            <input type="submit" value="Añadir Producto" class="boton boton-verde">
+                    </select>
+                </div>
+            </fieldset>
+
+            <div class="d-grid gap-2">
+                <input type="submit" value="Añadir Producto" class="btn btn-success btn-lg">
+            </div>
         </form>
     </main>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 <?php 

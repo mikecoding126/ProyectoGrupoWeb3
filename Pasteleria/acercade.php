@@ -13,117 +13,113 @@
 <main class="container my-5">
     <section class="text-center mb-5">
         <h1 class="display-4 font-weight-bold">Acerca de Nosotros</h1>
-        <p class="lead">Nuestra deliciosa historia</p>
+        <p class="lead">Endulzando momentos especiales desde 1975</p>
     </section>
 
+    <!-- Historia -->
     <section class="mb-5">
-        <p class="text-muted text-justify">Nuestra deliciosa historia nace el año 1975 en lo que solía ser el pueblo pequeño de Santa Cruz, Bolivia. Con mucho cariño y buen gusto, Carla y Fernando, fusionaron los gustos cruceños con los de su hogar, Austria. Valorando la tradición y el sabor del arte de la pastelería, Fridolin se convirtió en la cadena pastelera más grande de nuestro país. Ahora Fridolin sigue enamorando a la ciudad con un sinfín de variedades de tortas, postres, y saladitos bolivianos.</p>
+        <div class="card border-0 shadow-sm p-4 historia-card">
+            <h2 class="text-center mb-4">Nuestra Historia</h2>
+            <p class="text-muted">Nuestra deliciosa historia nace el año 1975 en lo que solía ser el pueblo pequeño de Santa Cruz, Bolivia. Con mucho cariño y buen gusto, Carla y Fernando, fusionaron los gustos cruceños con los de su hogar, Austria. Valorando la tradición y el sabor del arte de la pastelería, Fridolin se convirtió en la cadena pastelera más grande de nuestro país.</p>
+        </div>
     </section>
 
-    <section class="mb-5">
-        <h2 class="text-center mb-4">Nuestros Valores</h2>
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">🤝 Compromiso</h5>
-                        <p class="card-text">Estamos comprometidos con nuestros clientes en ofrecerles siempre lo mejor, tanto en servicios como en nuestros productos.</p>
+    <!-- Misión, Visión y Objetivos -->
+    <section class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow h-100 mission-card">
+                <div class="card-body text-center">
+                    <div class="icon-wrapper mb-3">
+                        <i class="fas fa-heart"></i>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">🛡️ Responsabilidad</h5>
-                        <p class="card-text">Cumplimos siempre las más altas normas de higiene y sanidad, desde nuestro personal hasta nuestras instalaciones.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">🙏 Respeto</h5>
-                        <p class="card-text">El respeto es una de nuestras virtudes, inculcamos este valor en nuestro personal y lo transmitimos a nuestros clientes.</p>
-                    </div>
+                    <h3 class="card-title">Misión</h3>
+                    <p class="card-text">Crear momentos inolvidables a través de nuestros productos artesanales, ofreciendo la más alta calidad en pastelería y repostería, mientras mantenemos viva la tradición y la innovación en cada creación.</p>
                 </div>
             </div>
         </div>
 
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">⏰ Puntualidad</h5>
-                        <p class="card-text">Fridolin se caracteriza por su rápido servicio, cumpliendo siempre con los pedidos de nuestra clientela.</p>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow h-100 vision-card">
+                <div class="card-body text-center">
+                    <div class="icon-wrapper mb-3">
+                        <i class="fas fa-star"></i>
                     </div>
+                    <h3 class="card-title">Visión</h3>
+                    <p class="card-text">Ser reconocidos como la pastelería líder en innovación y calidad en Bolivia, expandiendo nuestra presencia mientras mantenemos la esencia artesanal que nos caracteriza.</p>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">🛠️ Integridad</h5>
-                        <p class="card-text">Ser una empresa íntegra en todo sentido es clave para el equipo que conforma Fridolin.</p>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow h-100 objectives-card">
+                <div class="card-body text-center">
+                    <div class="icon-wrapper mb-3">
+                        <i class="fas fa-bullseye"></i>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">🛎️ Servicio</h5>
-                        <p class="card-text">Nuestros servicios son un referente de la buena atención, garantizando una excelente experiencia.</p>
-                    </div>
+                    <h3 class="card-title">Objetivos</h3>
+                    <ul class="list-unstyled text-left">
+                        <li>🎯 Mantener la excelencia en calidad</li>
+                        <li>🎯 Innovar en sabores y diseños</li>
+                        <li>🎯 Expandir nuestra presencia nacional</li>
+                        <li>🎯 Formar personal especializado</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="mb-5">
-        <h2 class="text-center mb-4">¿Por qué pedir online?</h2>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card border-0 shadow h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">🔒 Seguridad</h5>
-                        <p class="card-text">Nuestro sitio posee un alto nivel de seguridad con encriptación de 256 bits, fomentando además el distanciamiento social. ¡Nosotros llegamos a vos!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="card border-0 shadow h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">💻 Eficiencia</h5>
-                        <p class="card-text">Comprar nunca fue tan fácil: buscá productos, elegí cantidades, ingresá tus datos y seleccioná tu método de pago.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card border-0 shadow h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">💰 Ofertas</h5>
-                        <p class="card-text">Revisá nuestra sección de promociones y suscribite a nuestro newsletter para mantenerte informado de todas las novedades.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="card border-0 shadow h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">📅 Anticipación</h5>
-                        <p class="card-text">Programá tus pedidos con anticipación. Elegí la fecha y hora para recibir tu pedido cómodamente.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- [Resto del código existente...] -->
 </main>
 
+<style>
+/* Estilos adicionales para las nuevas secciones */
+.historia-card {
+    background: linear-gradient(135deg, #fff9f9, #fff5f5);
+    border-radius: 15px;
+}
 
+.mission-card, .vision-card, .objectives-card {
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #fff9f9, #fff5f5);
+}
+
+.mission-card:hover, .vision-card:hover, .objectives-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #ff8fab;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.icon-wrapper i {
+    color: white;
+    font-size: 24px;
+}
+
+.card-title {
+    color: #ff8fab;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+    color: #5c4646;
+}
+
+</style>
 <?php
     incluirTemplate("footer");
 ?>
 
-    <script src="build/js/bundle.min.js"></script> <!-- Incluye el script JavaScript -->
+    <script src="build/js/bundle.min.js"></script> 
 </body>
 </html>

@@ -1,22 +1,9 @@
 <?php
-    function conectarDB(){
-        $db=mysqli_connect('localhost','root','','pasteleriac');
-        if(!$db){
-            echo "No se conecto";
-            exit;
-        }
-        return $db;
+function conectarDB() {
+    $db = new mysqli('localhost', 'root', '', 'pasteleriac');
+    if ($db->connect_error) {
+        die('Error de conexión: ' . $db->connect_error);
     }
-
-?>
-<?php
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "pasteleriac"; 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    $db->set_charset("utf8");
+    return $db;
 }
-$conn->set_charset("utf8");
-?>

@@ -113,6 +113,8 @@
                         <div class="card-body text-center">
                             <h5 class="card-title"><?php echo $reg['nombre']; ?></h5>
                             <p class="card-text"><?php echo $reg['descripcion']; ?></p>
+                            <p class="card-text"><?php echo  'FehaFin '.$reg['fecha_fin']; ?></p>
+                            <p class="card-text"><?php echo 'MontoDescuento '. $reg['monto_descuento']; ?></p>
                             <p class="precio card-text">Bs.-<?php echo $reg['precio']; ?></p>
                         </div>
                     </div>

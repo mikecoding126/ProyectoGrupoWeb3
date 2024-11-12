@@ -5,34 +5,21 @@
         header("Location:/pasteleria");
     }*/
     require '../../includes/config/database.php';
-    $db=conectarDB();
+  
+    $db = conectarDB();
     
-    require '../../includes/funciones.php';
-    incluirTemplate('header');
-?>
-<main class="contenedor seccion">
-    <h1>Borrar</h1>
-    <?php 
-        $cod=$_GET['cod'];
-        $con_sql="UPDATE promociones SET estado='Agotado' WHERE codPromocion='$cod'";
-        $res=mysqli_query($db, $con_sql); 
-        if ($res) {
-            echo "
-                <script>
-                    alert('Promoción agotada');
-                    location.href='listado.php';
-                </script>
-            ";
+    if(isset($_GET['id'])) {
+        $id = (int)$_GET['id'];
+        
+        $query = "UPDATE promociones SET estado = 'inactiva' WHERE id = ?";
+        $stmt = mysqli_prepare($db, $query);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        
+        if(mysqli_stmt_execute($stmt)) {
+            header('Location: listado.php?mensaje=3');
         } else {
-            echo "
-                <script>
-                    alert('Promoción disponible');
-                </script>
-            ";
+            header('Location: listado.php?error=1');
         }
-    ?>
-</main>
-
-<?php
-    incluirTemplate('footer');
-?>
+        
+        mysqli_stmt_close($stmt);
+    }

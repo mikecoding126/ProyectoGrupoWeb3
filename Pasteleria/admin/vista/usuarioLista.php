@@ -1,6 +1,7 @@
 <?php
+require_once '../../includes/funciones.php';
+require_once '../../includes/config/database.php';
 
-require '../../includes/funciones.php';
 incluirTemplate('header');
 ?>
 <style>
@@ -74,28 +75,67 @@ incluirTemplate('header');
         color: #ffc107 !important;
     }
 </style>
+
 <main class="contenedor seccion">
     <a href="../index.php" class="btn btn-primary mb-4">Volver</a>
     <a href="usuarioNuevo.php" class="btn btn-primary mb-4">Nuevo Usuario</a>
     <h1>Lista Usuarios</h1>
     <table class="table table-striped">
-        <tr>
-            <td>ID</td>
-            <td>EMAIL</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Tipo Usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
         <?php
-        require '../../includes/config/database.php';
         $db = conectarDB();
-        $con_sql = "select * from usuariosd";
-        $res = mysqli_query($db, $con_sql);
-        while ($reg = mysqli_fetch_array($res)) {
-            echo "<tr>";
-            echo "<td>" . $reg['idUsuario'] . "</td>";
-            echo "<td>" . $reg['email'] . "</td>";
-            echo "<td><a href='../controlador/usuarioElimina.php?cod=" . $reg['idUsuario'] . "' class='btn btn-danger'>Eliminar</a></td>";
-            echo "<td><a href='../controlador/usuarioModifica.php?cod=" . $reg['idUsuario'] . "' class='btn btn-success'>Modificar</a></td>";
-            echo "</tr>";
+        
+        // Verificar la conexión
+        if (!$db) {
+            die("Error de conexión: " . mysqli_connect_error());
         }
+
+        // Consulta adaptada - ajusta los nombres de las columnas según tu base de datos
+        $query = "SELECT * FROM usuarios WHERE estado = 'activo'";
+        $resultado = mysqli_query($db, $query);
+
+        // Verificar si hay error en la consulta
+        if (!$resultado) {
+            echo "<div class='alert alert-danger'>Error en la consulta: " . mysqli_error($db) . "</div>";
+        } else {
+            // Verificar si hay registros
+            if (mysqli_num_rows($resultado) > 0) {
+                while ($reg = mysqli_fetch_assoc($resultado)) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($reg['id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($reg['nombre']) . "</td>";
+                    echo "<td>" . htmlspecialchars($reg['apellido']) . "</td>";
+                    echo "<td>" . htmlspecialchars($reg['email']) . "</td>";
+                    echo "<td>" . htmlspecialchars($reg['tipo_usuario']) . "</td>";
+                    echo "<td>
+                            <a href='../controlador/usuarioElimina.php?id=" . $reg['id'] . "' 
+                               class='btn btn-danger btn-sm'>Eliminar</a>
+                            <a href='../controlador/usuarioModifica.php?cod=" . $reg['id'] . "' 
+                               class='btn btn-success btn-sm'>Modificar</a>
+                          </td>";
+                    echo "</tr>";
+                }
+               
+            } else {
+                echo "<tr><td colspan='6' class='text-center'>No hay usuarios registrados</td></tr>";
+            }
+        }
+        
+        // Cerrar la conexión
+        mysqli_close($db);
         ?>
+        </tbody>
     </table>
 </main>
+
+<?php incluirTemplate("footer"); ?>

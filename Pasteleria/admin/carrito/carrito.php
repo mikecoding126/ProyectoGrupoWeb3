@@ -44,7 +44,7 @@ incluirTemplate('header');
                     <td><?php echo $producto['cantidad']; ?></td>
                     <td>Bs.-<?php echo $producto['precio']; ?></td>
                     <td>Bs.-<?php echo $subtotal; ?></td>
-                    <td><a href="eliminar_carrito.php?cod=<?php echo $producto['codProducto']; ?>" class="btn btn-danger btn-sm">Eliminar</a></td>
+                    <td><a href="eliminar_carrito.php?cod=<?php echo $producto['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a></td>
                 </tr>
                 <?php } ?>
                 <tr>

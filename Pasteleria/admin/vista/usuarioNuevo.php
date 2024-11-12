@@ -84,22 +84,34 @@
       <div class="login-header">
           <span class="logo">🍰 Registrarse</span>
       </div>
-  
-  <form action="../controlador/nuevo.php" method="post" class = "formulario">
-  
-      <fieldset>
-          <div>
-              <input type="email" class="form-control" name="ema" placeholder="Email" required id="ema">
-          </div>
-          <div>
-              <input type="password" class="form-control" name="pas1" placeholder="Password" required id="pas1">
-          </div>
-          <div>
-              <input type="password" class="form-control" name="pas2" placeholder="Confirmar Password" required id="pas2">
-          </div>
-          <div>
-              <button type="submit" class="btn login-button" value="Registrar Usuario" name="registrar" id="">Registrarse</button>
-          
+      <form action="../controlador/nuevo.php" method="post" class="formulario">
+    <fieldset>
+        <div>
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+        </div>
+        <div>
+            <input type="text" class="form-control" name="apellido" placeholder="Apellido" required>
+        </div>
+        <div>
+            <input type="email" class="form-control" name="ema" placeholder="Email" required>
+        </div>
+        <div>
+            <input type="password" class="form-control" name="pas1" placeholder="Password" required>
+        </div>
+        <div>
+            <input type="password" class="form-control" name="pas2" placeholder="Confirmar Password" required>
+        </div>
+        <div>
+            <select name="tipo_usuario" class="form-control" required>
+                <option value="cliente">Cliente</option>
+                <option value="empleado">Empleado</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="btn login-button" name="registrar">Registrarse</button>
+        </div>
+    </fieldset>
+</form>
            
           </div>
           <a href="../../login.php" class="boton boton-verde">Volver</a>

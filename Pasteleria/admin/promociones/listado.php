@@ -4,145 +4,140 @@ $auth = $_SESSION['login'];
 if (!$auth) {
     header("Location:/pasteleria");
 }*/
+
+
 require '../../includes/config/database.php';
 $db = conectarDB();
-
 require '../../includes/funciones.php';
 incluirTemplate('header');
+// Consulta JOIN para obtener también el nombre del producto
+$query = "SELECT p.*, pr.nombre as nombre_producto 
+          FROM promociones p 
+          LEFT JOIN productos pr ON p.producto_id = pr.id 
+          WHERE p.estado = 'activa' 
+          ORDER BY p.fecha_inicio DESC";
+$resultado = mysqli_query($db, $query);
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/283335a286.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <title>Listado de Productos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Listado de Promociones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #007bff;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .contenedor {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .table {
-            font-size: 1.2rem;
-        }
-
-        .table thead {
-            background-color: #343a40;
-            color: white;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .img-thumbnail {
+        .table img {
             max-width: 100px;
+            height: auto;
         }
-
-        .text-warning {
-            color: #ffc107 !important;
+        .badge {
+            font-size: 0.9em;
+        }
+        .precio-original {
+            text-decoration: line-through;
+            color: #999;
         }
     </style>
 </head>
-
 <body>
-    <main class="contenedor seccion">
-        <a href="../index.php" class="btn btn-primary mb-4">Volver</a>
-        <a href="crear.php" class="btn btn-primary mb-4">Nueva Promoción</a>
-        <h1 class="mb-4">Promociones</h1>
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>Código</th>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th colspan="2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $con_sql = "SELECT * FROM promociones WHERE estado = 'activa'";
-                    $res = mysqli_query($db, $con_sql);
-                    while ($reg = $res->fetch_assoc()) {
-                        ?>
-                        <tr>
-                            <td><?php echo $reg['id']; ?></td>
-                            <td><img src="imagenes/<?php echo $reg['imagen']; ?>" class="img-thumbnail"></td>
-                            <td><?php echo $reg['nombre']; ?></td>
-                            <td><?php echo $reg['descripcion']; ?></td>
-                            <td class="text-warning font-weight-bold">Bs.-<?php echo $reg['precio']; ?></td>
-                            <td><a href="borrar.php?cod=<?php echo $reg['producto_id']; ?>"
-                                    class="btn btn-danger btn-sm">AGOTADO</a></td>
-                            <td><a href="actualizar.php?cod=<?php echo $reg['producto_id']; ?>"
-                                    class="btn btn-success btn-sm">MODIFICAR</a></td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </main>
 
-    <?php incluirTemplate('footer'); ?>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+<main class="container mt-4">
+    <h1>Listado de Promociones</h1>
+    <a href="../index.php" class="btn btn-primary">Volver</a>
+    <a href="crear.php" class="btn btn-success mb-3">Nueva Promoción</a>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Imagen</th>
+                    <th>Nombre Promoción</th>
+                    <th>Producto</th>
+                    <th>Precios</th>
+                    <th>Descuento</th>
+                    <th>Vigencia</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($promocion = mysqli_fetch_assoc($resultado)): ?>
+                <tr>
+                    <td><?php echo $promocion['id']; ?></td>
+                    <td>
+                        <?php if($promocion['imagen']): ?>
+                            <img src="imagenes/<?php echo $promocion['imagen']; ?>" 
+                                 alt="<?php echo $promocion['nombre']; ?>" 
+                                 class="img-thumbnail">
+                        <?php else: ?>
+                            <span class="text-muted">Sin imagen</span>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <strong><?php echo $promocion['nombre']; ?></strong>
+                        <br>
+                        <small class="text-muted"><?php echo $promocion['descripcion']; ?></small>
+                    </td>
+                    <td><?php echo $promocion['nombre_producto']; ?></td>
+                    <td>
+                        <?php if($promocion['monto_descuento'] > 0 || $promocion['porcentaje_descuento'] > 0): ?>
+                            <span class="precio-original">BS.<?php echo number_format($promocion['precio'], 2); ?></span>
+                            <br>
+                            <strong class="text-success">
+                                BS.<?php 
+                                    $precio_final = $promocion['precio'];
+                                    if($promocion['monto_descuento'] > 0) {
+                                        $precio_final -= $promocion['monto_descuento'];
+                                    } elseif($promocion['porcentaje_descuento'] > 0) {
+                                        $precio_final -= ($precio_final * ($promocion['porcentaje_descuento']/100));
+                                    }
+                                    echo number_format($precio_final, 2);
+                                ?>
+                            </strong>
+                        <?php else: ?>
+                            $<?php echo number_format($promocion['precio'], 2); ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if($promocion['porcentaje_descuento'] > 0): ?>
+                            <span class="badge bg-info"><?php echo $promocion['porcentaje_descuento']; ?>%</span>
+                        <?php endif; ?>
+                        <?php if($promocion['monto_descuento'] > 0): ?>
+                            <span class="badge bg-warning">-$<?php echo number_format($promocion['monto_descuento'], 2); ?></span>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <small>
+                            Inicio: <?php echo date('d/m/Y', strtotime($promocion['fecha_inicio'])); ?><br>
+                            Fin: <?php echo date('d/m/Y', strtotime($promocion['fecha_fin'])); ?>
+                        </small>
+                    </td>
+                    <td>
+                        <?php if($promocion['estado'] == 'activa'): ?>
+                            <span class="badge bg-success">Activa</span>
+                        <?php else: ?>
+                            <span class="badge bg-danger">Inactiva</span>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <div class="btn-group-vertical">
+                            <a href="actualizar.php?id=<?php echo $promocion['id']; ?>" 
+                               class="btn btn-primary btn-sm mb-1">Editar</a>
+                            <a href="borrar.php?id=<?php echo $promocion['id']; ?>" 
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Desea desactivar esta promoción?')">
+                                Desactivar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

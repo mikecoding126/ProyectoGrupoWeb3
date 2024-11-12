@@ -98,87 +98,116 @@
 </head>
 <body>
     <main class="contenedor seccion">
-    <a href="../index.php" class="btn btn-primary mb-4">Volver</a>
+        <a href="../index.php" class="btn btn-primary mb-4">Volver</a>
         <a href="crear.php" class="btn btn-primary mb-4">Nuevo Producto</a>
         <h1 class="mb-4">Productos</h1>
         <div class="table-responsive">
-    <table class="table table-hover table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>Código</th>
-                <th>Proveedor</th>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th colspan="2">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $con_sql = "SELECT 
-                p.codigo_producto,
-                p.nombre as producto_nombre,
-                p.imagen,
-                p.descripcion,
-                p.precio,
-                v.nombre as proveedor_nombre,
-                v.telefono as proveedor_telefono
-            FROM productos p 
-            INNER JOIN proveedores v ON p.proveedor_id = v.id 
-            WHERE p.estado = 'disponible'";
+            <table class="table table-hover table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Código</th>
+                        <th>Proveedor</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $con_sql = "SELECT 
+                        p.codigo_producto,
+                        p.nombre as producto_nombre,
+                        p.imagen,
+                        p.descripcion,
+                        c.categoria as nombre_categoria,
+                        p.precio,
+                        p.stock,
+                        v.nombre as proveedor_nombre,
+                        v.telefono as proveedor_telefono
+                    FROM productos p 
+                    INNER JOIN proveedores v ON p.proveedor_id = v.id 
+                    LEFT JOIN categorias c ON p.categoria_id = c.id
+                    WHERE p.estado = 'disponible'
+                    ORDER BY p.codigo_producto";
 
-            $res = mysqli_query($db, $con_sql);
-            if (!$res) {
-                echo '<tr><td colspan="8" class="text-center text-danger">Error al cargar los datos: ' . 
-                     htmlspecialchars(mysqli_error($db)) . '</td></tr>';
-            } else {
-                if (mysqli_num_rows($res) > 0) {
-                    while ($reg = mysqli_fetch_assoc($res)) {
-            ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($reg['codigo_producto']); ?></td>
-                            <td><?php echo htmlspecialchars($reg['proveedor_nombre']) . " - " . 
-                                     htmlspecialchars($reg['proveedor_telefono']); ?></td>
-                            <td>
-                                <?php if (!empty($reg['imagen'])): ?>
-                                    <img src="imagenes/<?php echo htmlspecialchars($reg['imagen']); ?>" 
-                                         class="img-thumbnail" 
-                                         alt="Imagen de <?php echo htmlspecialchars($reg['producto_nombre']); ?>"
-                                         style="max-width: 100px;">
-                                <?php else: ?>
-                                    <span class="text-muted">Sin imagen</span>
-                                <?php endif; ?>
-                            </td>
-                            <td><?php echo htmlspecialchars($reg['producto_nombre']); ?></td>
-                            <td><?php echo htmlspecialchars($reg['descripcion']); ?></td>
-                            <td class="text-warning font-weight-bold">
-                                Bs.- <?php echo number_format($reg['precio'], 2, ',', '.'); ?>
-                            </td>
-                            <td>
-                                <a href="borrar.php?cod=<?php echo urlencode($reg['codigo_producto']); ?>" 
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('¿Está seguro de marcar este producto como agotado?');">
-                                    <i class="fas fa-times-circle"></i> AGOTADO
-                                </a>
-                            </td>
-                            <td>
-                                <a href="actualizar.php? cod=<?php echo urlencode($reg['codigo_producto']); ?>" 
-                                   class="btn btn-success btn-sm">
-                                    <i class="fas fa-edit"></i> MODIFICAR
-                                </a>
-                            </td>
-                        </tr>
-            <?php
+                    $res = mysqli_query($db, $con_sql);
+                    if (!$res) {
+                        echo '<tr><td colspan="9" class="text-center text-danger">Error al cargar los datos: ' . 
+                             htmlspecialchars(mysqli_error($db)) . '</td></tr>';
+                    } else {
+                        if (mysqli_num_rows($res) > 0) {
+                            while ($reg = mysqli_fetch_assoc($res)) {
+                    ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($reg['codigo_producto']); ?></td>
+                                    <td>
+                                        <strong><?php echo htmlspecialchars($reg['proveedor_nombre']); ?></strong>
+                                        <br>
+                                        <small class="text-muted">
+                                            Tel: <?php echo htmlspecialchars($reg['proveedor_telefono']); ?>
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <?php if (!empty($reg['imagen'])): ?>
+                                            <img src="imagenes/<?php echo htmlspecialchars($reg['imagen']); ?>" 
+                                                 class="img-thumbnail" 
+                                                 alt="Imagen de <?php echo htmlspecialchars($reg['producto_nombre']); ?>"
+                                                 style="max-width: 100px;">
+                                        <?php else: ?>
+                                            <span class="text-muted">Sin imagen</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($reg['producto_nombre']); ?></td>
+                                    <td>
+                                        <div style="max-height: 100px; overflow-y: auto;">
+                                            <?php echo htmlspecialchars($reg['descripcion']); ?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info text-dark">
+                                            <?php echo htmlspecialchars($reg['nombre_categoria']); ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-warning fw-bold">
+                                        Bs.- <?php echo number_format($reg['precio'], 2, ',', '.'); ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($reg['stock'] <= 5): ?>
+                                            <span class="badge bg-danger"><?php echo $reg['stock']; ?></span>
+                                        <?php elseif ($reg['stock'] <= 10): ?>
+                                            <span class="badge bg-warning"><?php echo $reg['stock']; ?></span>
+                                        <?php else: ?>
+                                            <span class="badge bg-success"><?php echo $reg['stock']; ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="borrar.php?cod=<?php echo urlencode($reg['codigo_producto']); ?>" 
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('¿Está seguro de marcar este producto como agotado?');">
+                                            <i class="fas fa-times-circle"></i> AGOTADO
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="actualizar.php?cod=<?php echo urlencode($reg['codigo_producto']); ?>" 
+                                           class="btn btn-success btn-sm">
+                                            <i class="fas fa-edit"></i> MODIFICAR
+                                        </a>
+                                    </td>
+                                </tr>
+                    <?php
+                            }
+                        } else {
+                            echo '<tr><td colspan="9" class="text-center">No hay productos disponibles</td></tr>';
+                        }
                     }
-                } else {
-                    echo '<tr><td colspan="8" class="text-center">No hay productos promocionados disponibles</td></tr>';
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <?php incluirTemplate('footer'); ?>

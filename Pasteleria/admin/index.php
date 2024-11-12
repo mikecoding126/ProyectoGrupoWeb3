@@ -103,13 +103,13 @@ incluirTemplate('HeaderAdmin');
 <main class="contenedor seccion">
     <h1 class="titulo-admin">Administrador Pastelería Collita</h1>
     <div class="botones-admin">
-    
+    <a href="./categoria/listado_categorias.php" class="boton boton-naranja">Categorias</a>
         <a href="./productos/listado.php" class="boton boton-verde">Productos</a>
         
         <a href="./promociones/listado.php" class="boton boton-morado">Promociones</a>
-        <a href="" class="boton boton-naranja">Usuario</a>
+        <a href="./controlador/usuarioLista.php" class="boton boton-rojo">Usuario</a>
         
-        <a href="./vista/adminLista.php" class="boton boton-rojo">Administradores</a>
+        
         <a href="./proveedor/listado.php" class="boton boton-azul">Proveedores</a>
 
         

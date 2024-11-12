@@ -64,17 +64,7 @@
 </section>
 
 <?php
-/*
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "pasteleriac"; 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
 
-    }
-$conn->set_charset("utf8");*/
 require 'includes/config/database.php';
 $db = conectarDB();
 ?>
@@ -85,14 +75,14 @@ $db = conectarDB();
     <div class="container text-center">
     <div class="row align-items-center">
     <?php
-$sql = "SELECT * FROM productos LIMIT 4";
-$result = $conn->query($sql);
+$sql = "SELECT * FROM productos LIMIT 8";
+$result = $db->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $nombre = $row['nombre'];
         $descripcion = $row['descripcion'];
         $precio = $row['precio'];
-        $imagen = 'admin/productos/imagenes/' . $row['imagen']; // Concatenamos la ruta base
+        $imagen = 'admin/productos/imagenes/' . $row['imagen'];
         echo '<div class="col-md-3">';
         echo '<div class="card m-2" style="width: 18rem;">';
         echo '<img src="'.$imagen.'" class="card-img-top" alt="'.$nombre.'">';

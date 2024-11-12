@@ -116,58 +116,83 @@
 <section class="seccion contenedor mt-5">
     <h2 class="text-center mb-5">PRODUCTOS</h2>
 
-    <!-- Menú de categorías -->
-    <div class="text-center mb-4">
-        <div class="btn-group" role="group">
-            <a href="?categoria=todos" class="btn btn-outline-primary <?php echo (!isset($_GET['categoria']) || $_GET['categoria'] == 'todos') ? 'active' : ''; ?>">Todos</a>
-            <a href="?categoria=Pasteles" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Pasteles') ? 'active' : ''; ?>">Pasteles</a>
-            <a href="?categoria=Tartas" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Tartas') ? 'active' : ''; ?>">Tartas</a>
-            <a href="?categoria=Packs" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Packs') ? 'active' : ''; ?>">Packs</a>
-            <a href="?categoria=Aperitivos" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Aperitivos') ? 'active' : ''; ?>">Aperitivos</a>
-            <a href="?categoria=Brownies" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Brownies') ? 'active' : ''; ?>">Brownies</a>
-            <a href="?categoria=Cheesecakes" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Cheesecakes') ? 'active' : ''; ?>">Cheesecakes</a>
-            <a href="?categoria=Galletas" class="btn btn-outline-primary <?php echo (isset($_GET['categoria']) && $_GET['categoria'] == 'Galletas') ? 'active' : ''; ?>">Galletas</a>
-        </div>
-    </div>
-
-    <div class="row">
+ <!-- Menú de categorías -->
+<div class="text-center mb-4">
+    <div class="btn-group" role="group">
+        <a href="?categoria=todos" class="btn btn-outline-primary <?php echo (!isset($_GET['categoria']) || $_GET['categoria'] == 'todos') ? 'active' : ''; ?>">Todos</a>
         <?php
         require 'includes/config/database.php';
         $db = conectarDB();
         
-        // Construir la consulta SQL según la categoría seleccionada
-        $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : 'todos';
-        if ($categoria == 'todos') {
-            $con_sql = "SELECT * FROM productos WHERE estado = 'Disponible'";
-        } else {
-            $categoria = mysqli_real_escape_string($db, $categoria); // Prevenir SQL injection
-            $con_sql = "SELECT * FROM productos WHERE estado = 'Disponible' AND categoria = '$categoria'";
+        // Obtener todas las categorías activas
+        $query_categorias = "SELECT * FROM categorias WHERE estado = 'activo' ORDER BY categoria";
+        $resultado_categorias = mysqli_query($db, $query_categorias);
+        
+        while($cat = mysqli_fetch_assoc($resultado_categorias)) {
+            $categoria_nombre = htmlspecialchars($cat['categoria']);
+            $is_active = (isset($_GET['categoria']) && $_GET['categoria'] == $cat['id']) ? 'active' : '';
+            echo "<a href='?categoria={$cat['id']}' class='btn btn-outline-primary {$is_active}'>{$categoria_nombre}</a>";
         }
-
-        $res = mysqli_query($db, $con_sql);
-        while ($reg = mysqli_fetch_assoc($res)) {
         ?>
+    </div>
+</div>
 
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 anuncio">
-                <img src="admin/productos/imagenes/<?php echo $reg['imagen']; ?>" class="card-img-top" alt="<?php echo $reg['nombre']; ?>">
-                <div class="card-body text-center">
-                    <h5 class="card-title"><?php echo $reg['nombre']; ?></h5>
-                    <p class="card-text"><?php echo $reg['descripcion']; ?></p>
-                    <p class="precio card-text">Bs.-<?php echo $reg['precio']; ?></p>
-                    <!-- Formulario para agregar al carrito -->
-                    <form action="admin/includes/carrito.php" method="post">
-                        <input type="hidden" name="id" value="<?php echo $reg['codigo_producto']; ?>">
-                        <input type="hidden" name="nombre" value="<?php echo $reg['nombre']; ?>">
-                        <input type="hidden" name="precio" value="<?php echo $reg['precio']; ?>">
-                        <input type="hidden" name="action" value="agregar">
-                        <button type="submit" class="btn btn-success">Agregar al carrito</button>
-                    </form>
+<div class="row">
+    <?php
+    // Construir la consulta SQL según la categoría seleccionada
+    $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : 'todos';
+    
+    if ($categoria == 'todos') {
+        $con_sql = "SELECT p.*, c.categoria as nombre_categoria 
+                    FROM productos p 
+                    LEFT JOIN categorias c ON p.categoria_id = c.id 
+                    WHERE p.estado = 'disponible'";
+    } else {
+        $categoria = mysqli_real_escape_string($db, $categoria);
+        $con_sql = "SELECT p.*, c.categoria as nombre_categoria 
+                    FROM productos p 
+                    LEFT JOIN categorias c ON p.categoria_id = c.id 
+                    WHERE p.estado = 'disponible' 
+                    AND p.categoria_id = '$categoria'";
+    }
+
+    $res = mysqli_query($db, $con_sql);
+    
+    if (!$res) {
+        echo "Error en la consulta: " . mysqli_error($db);
+    } else {
+        while ($reg = mysqli_fetch_assoc($res)) {
+            ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 anuncio">
+                    <img src="admin/productos/imagenes/<?php echo htmlspecialchars($reg['imagen']); ?>" 
+                         class="card-img-top" 
+                         alt="<?php echo htmlspecialchars($reg['nombre']); ?>">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><?php echo htmlspecialchars($reg['nombre']); ?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($reg['descripcion']); ?></p>
+                        <p class="badge bg-secondary"><?php echo htmlspecialchars($reg['nombre_categoria']); ?></p>
+                        <p class="precio card-text">Bs.-<?php echo number_format($reg['precio'], 2); ?></p>
+                        
+                        <?php if($reg['stock'] > 0): ?>
+                            <form action="admin/includes/carrito.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo $reg['codigo_producto']; ?>">
+                                <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($reg['nombre']); ?>">
+                                <input type="hidden" name="precio" value="<?php echo $reg['precio']; ?>">
+                                <input type="hidden" name="action" value="agregar">
+                                <button type="submit" class="btn btn-success">
+                                    Agregar al carrito
+                                </button>
+                            </form>
+                        <?php else: ?>
+                            <button class="btn btn-secondary" disabled>
+                                Sin stock disponible
+                            </button>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <?php
+            <?php
         }
         
         // Verificar si no hay productos en la categoría
@@ -176,8 +201,9 @@
             echo '<p class="alert alert-info">No hay productos disponibles en esta categoría.</p>';
             echo '</div>';
         }
-        ?>
-    </div>
+    }
+    ?>
+</div>
 </section>
 
 

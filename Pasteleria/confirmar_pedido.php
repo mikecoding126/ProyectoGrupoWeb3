@@ -1,13 +1,3 @@
-<?php
-session_start();
-
-// Verificar que hay productos en el carrito
-if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
-    header('Location: index.php');
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -110,42 +100,54 @@ if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
         }
     </style>
 </head>
-<?php require_once('includes/template/header.php'); ?>
 <body>
-<h2></h2>
-<h2></h2>
-<h2>Confirmar Pedido</h2>
+    <?php require_once('includes/template/header.php'); ?>
+    
     <main class="contenedor seccion">
-       
-
-
+        <h2>Confirmar Pedido</h2>
+        
         <div class="contenedor">
             <!-- Columna de datos personales -->
             <div class="columna">
                 <form action="procesar_pedido.php" method="post" class="datos-personales">
-                    <h3>Datos Personales</h3>
+                    <h3>Datos de Entrega</h3>
+
+                    <?php if(isset($_SESSION['id'])): 
+                        // Obtener datos del cliente
+                        $query = "SELECT c.* FROM clientes c 
+                                JOIN usuarios u ON c.usuarixo_id = u.id 
+                                WHERE u.id = ?";
+                        $stmt = mysqli_prepare($db, $query);
+                        mysqli_stmt_bind_param($stmt, "i", $_SESSION['usuario_id']);
+                        mysqli_stmt_execute($stmt);
+                        $resultado = mysqli_stmt_get_result($stmt);
+                        $cliente = mysqli_fetch_assoc($resultado);
+                    ?>
+                        <div class="campo">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" 
+                                   value="<?php echo htmlspecialchars($cliente['nombre']); ?>" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label for="direccion">Dirección de Envío:</label>
+                            <input type="text" id="direccion" name="direccion" 
+                                   value="<?php echo htmlspecialchars($cliente['direccion']); ?>" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" 
+                                   value="<?php echo htmlspecialchars($cliente['telefono']); ?>" required>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="campo">
-                        <label for="nombre">Nombre Completo:</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="direccion">Dirección de Envío:</label>
-                        <input type="text" id="direccion" name="direccion" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefono" required>
-                    </div>
-
-                    <div class="campo">
-                        <label for="comentarios">Comentarios:</label>
+                        <label for="comentarios">Comentarios adicionales:</label>
                         <textarea id="comentarios" name="comentarios" rows="4"></textarea>
                     </div>
 
-                    <button type="submit">Enviar Pedido</button>
+                    <button type="submit">Confirmar Pedido</button>
                 </form>
             </div>
 
@@ -154,30 +156,40 @@ if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
                 <div class="resumen-pedido">
                     <h3>Resumen del Pedido</h3>
                     <table class="table">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($_SESSION['carrito'] as $producto): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($producto['nombre']); ?></td>
-                        <td>Bs.<?php echo number_format($producto['precio'], 2); ?></td>
-                        <td><?php echo $producto['cantidad']; ?></td>
-                        <td>Bs.<?php echo number_format($producto['precio'] * $producto['cantidad'], 2); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $total = 0;
+                            foreach ($_SESSION['carrito'] as $producto): 
+                                $subtotal = $producto['precio'] * $producto['cantidad'];
+                                $total += $subtotal;
+                            ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($producto['nombre']); ?></td>
+                                    <td>Bs.<?php echo number_format($producto['precio'], 2); ?></td>
+                                    <td><?php echo $producto['cantidad']; ?></td>
+                                    <td>Bs.<?php echo number_format($subtotal, 2); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            <tr>
+                                <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                                <td><strong>Bs.<?php echo number_format($total, 2); ?></strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </main>
+
+    <?php require_once('includes/template/footer.php'); ?>
     <script src="build/js/bundle.min.js"></script>
 </body>
-<?php require_once('includes/template/footer.php'); ?>
 </html>

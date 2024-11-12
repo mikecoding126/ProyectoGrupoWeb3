@@ -1,18 +1,9 @@
 <?php
-<<<<<<< HEAD
-/*
-    session_start();
-    $auth = $_SESSION['login'];*/
- /*   if(!$auth){*/
-      /*  header("Location:/pasteleria");
-  /*  }*/
-=======
    /* session_start();
     $auth = $_SESSION['login'];
     if(!$auth){
         header("Location:/pasteleria");
     }*/
->>>>>>> d710bc7ebf1e9c236021b315703fdc5fed1dbd8d
     require '../../includes/config/database.php';
     $db = conectarDB();
 
@@ -100,7 +91,7 @@
             <legend>Información general</legend>
             <div class="mb-3">
                 <label for="nom" class="form-label">Nombre</label>
-                <input type="text" name="nom" id="nom" class="form-control" placeholder="Nombre" required>
+                <input type="text" name="mom" id="nom"  class="form-control" placeholder="Nombre" required>
             </div>
             <div class="mb-3">
                 <label for="tel" class="form-label">Teléfono</label>
@@ -114,6 +105,16 @@
                 <label for="dir" class="form-label">Dirección</label>
                 <input type="text" name="dir" id="dir" class="form-control" placeholder="Dirección" required>
             </div>
+            <div class="mb-3">
+    <label class="form-label">Estado del Proveedor</label>
+    <div class="form-check">
+        <input type="radio" name="estado" value="promocionado" id="promocionado">
+        <label for="promocionado">Promocionado</label>
+    </div>
+    <div class="form-check">
+        <input type="radio" name="estado" value="no_promocionado" id="no_promocionado" checked>
+        <label for="no_promocionado">No Promocionado</label>
+    </div>
         </fieldset>
         <div class="d-flex justify-content-between">
             <input type="submit" value="Registrar Proveedor" class="btn btn-primary">

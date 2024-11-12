@@ -60,11 +60,11 @@
                         ?>
                     </a>
                 </li>
-                    <?php if($auth):?>
+                    <?php /*if($auth):?>
                                 <li><a class="nav-link" href="cerrarsesion2.php">Cerrar Sesión</a></li>
-                            <?php else: ?>
+                            <?php else: */?>
                                 <li><a class="nav-link" href="login.php">Iniciar Sesión</a> </li>
-                                <?php endif;?>
+                                <?php /* endif;*/?>
                     </ul>
                 </div>
            </div>

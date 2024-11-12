@@ -4,7 +4,7 @@
             <div class="col-md-6 mb-3 mb-md-0">
   
                 <h3>🍰 Pastelería El Collita 🍰</h3>
-                <p>"En nuestra pastelería, creamos momentos de deleite con exquisitos pasteles y postres artesanales, donde cada bocado es una celebración de sabores y dulzura.".</p>
+                <p>"En nuestra pastelería, vendemos productos garantizados en su calidad y sabor; trabajamos con empresas reconocidas internacionalmente, pedidos en <b>menos de 1 hora o sera gratis !!</b> ".</p>
             </div>
             <div class="col-md-6 mb-3 mb-md-0">
                 <h3>Contacto</h3>
