@@ -1,3 +1,40 @@
+<?php
+session_start();
+require_once('includes/config/database.php');
+$db = conectarDB();
+
+// Verificar si hay productos en el carrito
+if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
+    echo "<script>
+        alert('El carrito está vacío');
+        window.location.href = 'index.php';
+    </script>";
+    exit;
+}
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario_id'])) {
+    echo "<script>
+        alert('Debe iniciar sesión para realizar un pedido');
+        window.location.href = 'login.php';
+    </script>";
+    exit;
+}
+
+// Obtener datos del cliente
+$cliente = null;
+if (isset($_SESSION['usuario_id'])) {
+    $query = "SELECT c.*, u.nombre, u.apellido 
+              FROM clientes c 
+              JOIN usuarios u ON c.usuario_id = u.id 
+              WHERE u.id = ?";
+    $stmt = mysqli_prepare($db, $query);
+    mysqli_stmt_bind_param($stmt, "i", $_SESSION['usuario_id']);
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $cliente = mysqli_fetch_assoc($resultado);
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,16 +43,15 @@
     <title>Confirmar Pedido</title>
     <link rel="stylesheet" href="build/css/stylesn.css">
     <style>
-        /* Estilos adicionales para la estructura de dos columnas */
         .contenedor {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start; /* Alineación vertical */
+            align-items: flex-start;
             margin: 5px;
         }
 
         .contenedor .columna {
-            flex: 0 1 60%; /* Ancho de las columnas */
+            flex: 0 1 60%;
             padding: 20px;
             border-radius: 10px;
             background-color: #f8f9fa;
@@ -23,15 +59,15 @@
         }
 
         .contenedor .columna:first-child {
-            margin-right: 5%; /* Espacio entre columnas */
+            margin-right: 5%;
         }
 
         .contenedor .columna:last-child {
-            flex: 0 1 100%; /* Ancho de la segunda columna */
+            flex: 0 1 100%;
         }
 
         h2 {
-            text-align: center; /* Centrar el título */
+            text-align: center;
             margin-bottom: 20px;
             color: #343a40;
         }
@@ -53,7 +89,6 @@
             box-sizing: border-box;
         }
 
-      
         .resumen-pedido {
             padding: 20px;
             border-radius: 10px;
@@ -112,21 +147,11 @@
                 <form action="procesar_pedido.php" method="post" class="datos-personales">
                     <h3>Datos de Entrega</h3>
 
-                    <?php if(isset($_SESSION['id'])): 
-                        // Obtener datos del cliente
-                        $query = "SELECT c.* FROM clientes c 
-                                JOIN usuarios u ON c.usuarixo_id = u.id 
-                                WHERE u.id = ?";
-                        $stmt = mysqli_prepare($db, $query);
-                        mysqli_stmt_bind_param($stmt, "i", $_SESSION['usuario_id']);
-                        mysqli_stmt_execute($stmt);
-                        $resultado = mysqli_stmt_get_result($stmt);
-                        $cliente = mysqli_fetch_assoc($resultado);
-                    ?>
+                    <?php if($cliente): ?>
                         <div class="campo">
                             <label for="nombre">Nombre:</label>
                             <input type="text" id="nombre" name="nombre" 
-                                   value="<?php echo htmlspecialchars($cliente['nombre']); ?>" readonly>
+                                   value="<?php echo htmlspecialchars($cliente['nombre'] . ' ' . $cliente['apellido']); ?>" readonly>
                         </div>
 
                         <div class="campo">
@@ -140,6 +165,8 @@
                             <input type="tel" id="telefono" name="telefono" 
                                    value="<?php echo htmlspecialchars($cliente['telefono']); ?>" required>
                         </div>
+
+                        <input type="hidden" name="cliente_id" value="<?php echo $cliente['id']; ?>">
                     <?php endif; ?>
 
                     <div class="campo">

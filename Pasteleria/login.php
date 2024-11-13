@@ -36,7 +36,7 @@
                     
                     // Redirigir según tipo de usuario
                     if($usuario['tipo_usuario'] === 'empleado') {
-                        header('Location: admin/    .php');
+                        header('Location: admin/index.php');
                     } else {
                         header('Location: carrito.php');
                     }
@@ -179,6 +179,8 @@
         ¿Olvidaste tu contraseña?
     </a>
 </div>
+</div>
+            </body>
 </script>
 </body>
 </html>

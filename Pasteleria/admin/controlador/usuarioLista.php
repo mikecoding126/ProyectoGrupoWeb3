@@ -1,4 +1,5 @@
 <?php
+   
   include("../modelo/usuario.php");
     $us = new Usuario("", "", "", "", "", "");
     $res = $us->listaUsuarios();

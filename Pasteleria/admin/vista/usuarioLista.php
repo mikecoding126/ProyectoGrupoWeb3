@@ -1,4 +1,5 @@
 <?php
+   
 require_once '../../includes/funciones.php';
 require_once '../../includes/config/database.php';
 
@@ -79,6 +80,7 @@ incluirTemplate('header');
 <main class="contenedor seccion">
     <a href="../index.php" class="btn btn-primary mb-4">Volver</a>
     <a href="usuarioNuevo.php" class="btn btn-primary mb-4">Nuevo Usuario</a>
+    <a href="prueb.php" class="btn btn-danger btn-4">Nuevo Empleado(Admin)</a>
     <h1>Lista Usuarios</h1>
     <table class="table table-striped">
         <thead>

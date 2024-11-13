@@ -1,4 +1,5 @@
 <?php
+  
 include("../vista/usuarioNuevo.php");
 if (isset($_POST['registrar'])) {
     $nombre = $_POST['nombre'];

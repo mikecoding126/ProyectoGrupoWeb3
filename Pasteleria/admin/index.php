@@ -1,12 +1,12 @@
 <?php 
-    /* session_start();
+     session_start();
     
     $auth = $_SESSION['login'];
     if(!$auth){
-        header("Location:/pasteleria_2do");
-    }*/
+        header("Location:/index.php");
+    }
 require '../includes/funciones.php';
-incluirTemplate('HeaderAdmin');
+incluirTemplate('Header');
 ?>
 
 <style>

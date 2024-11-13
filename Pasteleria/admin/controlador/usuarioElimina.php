@@ -1,4 +1,5 @@
 <?php
+ 
     // Verifica que el ID existe
     if(!isset($_GET['id'])) {
         echo "<script>

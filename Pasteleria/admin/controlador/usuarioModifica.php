@@ -1,9 +1,5 @@
 <?php
-// session_start();
-// $auth = $_SESSION['login'];
-// if(!$auth){
-//     header('Location:/');
-// }
+
 require '../../includes/funciones.php';
 incluirTemplate('header');
 

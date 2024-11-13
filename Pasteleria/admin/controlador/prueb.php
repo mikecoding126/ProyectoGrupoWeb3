@@ -1,234 +1,198 @@
 <?php
+session_start();
+require '../../includes/funciones.php';
 require '../../includes/config/database.php';
-$db = conectarDB();
-
-$errores = [];
-$nombre = '';
-$apellido = '';
-$email = '';
-$telefono = '';
-$direccion = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
-    $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
-    $email = mysqli_real_escape_string($db, $_POST['email']);
-    $password = mysqli_real_escape_string($db, $_POST['password']);
-    $telefono = mysqli_real_escape_string($db, $_POST['telefono']);
-    $direccion = mysqli_real_escape_string($db, $_POST['direccion']);
-    $tipo_registro = $_POST['tipo_registro'] ?? 'cliente';
-    $tipo_cliente = $_POST['tipo_cliente'] ?? 'minorista';
-
-    // Validaciones
-    if(!$nombre) {
-        $errores[] = "El nombre es obligatorio";
-    }
-    if(!$apellido) {
-        $errores[] = "El apellido es obligatorio";
-    }
-    if(!$email) {
-        $errores[] = "El email es obligatorio";
-    }
-    if(!$password) {
-        $errores[] = "La contraseña es obligatoria";
-    }
-    if($tipo_registro === 'cliente') {
-        if(!$telefono) {
-            $errores[] = "El teléfono es obligatorio para clientes";
-        }
-        if(!$direccion) {
-            $errores[] = "La dirección es obligatoria para clientes";
-        }
-    }
-
-    // Verificar que el email no exista
-    $query = "SELECT id FROM usuarios WHERE email = ?";
-    $stmt = mysqli_prepare($db, $query);
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-    $resultado = mysqli_stmt_get_result($stmt);
-
-    if(mysqli_num_rows($resultado) > 0) {
-        $errores[] = "El email ya está registrado";
-    }
-
-    // Si no hay errores, crear el usuario
-    if(empty($errores)) {
-        // Hashear password
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-        // Iniciar transacción
-        mysqli_begin_transaction($db);
-
-        try {
-            // Insertar usuario
-            $query = "INSERT INTO usuarios (nombre, apellido, email, password, tipo_usuario) 
-                     VALUES (?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($db, $query);
-            mysqli_stmt_bind_param($stmt, "sssss", $nombre, $apellido, $email, $passwordHash, $tipo_registro);
-            mysqli_stmt_execute($stmt);
-            $usuario_id = mysqli_insert_id($db);
-
-            // Si es cliente, insertar en la tabla clientes
-            if($tipo_registro === 'cliente') {
-                $query = "INSERT INTO clientes (usuario_id, nombre, apellido, telefono, direccion, tipo_cliente) 
-                         VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = mysqli_prepare($db, $query);
-                mysqli_stmt_bind_param($stmt, "isssss", $usuario_id, $nombre, $apellido, $telefono, $direccion, $tipo_cliente);
-                mysqli_stmt_execute($stmt);
-            }
-
-            mysqli_commit($db);
-
-            // Redirigir al login
-            echo "<script>
-                alert('Usuario registrado correctamente');
-                window.location.href = '../../login.php';
-            </script>";
-            exit;
-        } catch (Exception $e) {
-            mysqli_rollback($db);
-            $errores[] = "Error al crear el usuario: " . $e->getMessage();
-        }
-    }
-}
+incluirTemplate('header');
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- [Head content remains the same] -->
+    <meta charset="UTF-8">
+    <title>Registro de Empleados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/PASTELERIA/build/css/custom-style.css">
     <style>
-        /* [Previous styles remain the same] */
-        
-        /* Añadir estilos para campos condicionales */
-        .campos-cliente {
-            display: none;
+        body {
+            background-color: #faf3e0;
+            font-family: 'Arial', sans-serif;
         }
-        .campos-cliente.mostrar {
-            display: block;
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header .logo {
+            font-size: 50px;
+            color: #d35400;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+        .login-button {
+            background-color: #d35400;
+            border-color: #d35400;
+            color: white;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        .login-button:hover {
+            background-color: #e67e22;
+            border-color: #e67e22;
         }
     </style>
 </head>
 <body>
-    <div class="registro-container">
-        <div class="registro-header">
-            <div class="logo">🍰</div>
-            <h2>Registro de Usuario</h2>
-        </div>
-
-        <?php foreach($errores as $error): ?>
-            <div class="alerta error">
-                <?php echo $error; ?>
+    <div class="container">
+        <div class="login-container">
+            <div class="login-header">
+                <span class="logo">🍰</span>
+                <h2>Registro de Empleado</h2>
             </div>
-        <?php endforeach; ?>
-
-        <form method="POST">
-            <div class="form-group">
-                <label class="form-label">Tipo de Registro:</label>
-                <div class="radio-group">
-                    <label class="radio-label">
-                        <input type="radio" name="tipo_registro" value="usuario" checked>
-                        Usuario Regular
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="tipo_registro" value="cliente">
-                        Cliente
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Nombre:</label>
-                <input type="text" 
-                       class="form-control" 
-                       name="nombre" 
-                       value="<?php echo htmlspecialchars($nombre); ?>" 
-                       required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Apellido:</label>
-                <input type="text" 
-                       class="form-control" 
-                       name="apellido" 
-                       value="<?php echo htmlspecialchars($apellido); ?>" 
-                       required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Email:</label>
-                <input type="email" 
-                       class="form-control" 
-                       name="email" 
-                       value="<?php echo htmlspecialchars($email); ?>" 
-                       required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Contraseña:</label>
-                <input type="password" 
-                       class="form-control" 
-                       name="password" 
-                       required>
-            </div>
-
-            <div class="campos-cliente">
-                <div class="form-group">
-                    <label class="form-label">Teléfono:</label>
-                    <input type="tel" 
-                           class="form-control" 
-                           name="telefono" 
-                           value="<?php echo htmlspecialchars($telefono); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Dirección:</label>
-                    <input type="text" 
-                           class="form-control" 
-                           name="direccion" 
-                           value="<?php echo htmlspecialchars($direccion); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Tipo de Cliente:</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="tipo_cliente" value="minorista" checked>
-                            Minorista
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="tipo_cliente" value="mayorista">
-                            Mayorista
-                        </label>
+            <form action="" method="post" class="formulario">
+                <fieldset>
+                    <div>
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
                     </div>
-                </div>
+                    <div>
+                        <input type="text" class="form-control" name="apellido" placeholder="Apellido" required>
+                    </div>
+                    <div>
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" name="password_confirm" placeholder="Confirmar Password" required>
+                    </div>
+                    <div>
+                        <select name="rol" class="form-control" required>
+                            <option value="">Seleccione Rol</option>
+                            <option value="Vendedor">Vendedor</option>
+                            <option value="Panadero">Panadero</option>
+                            <option value="Cajero">Cajero</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="number" class="form-control" name="salario" placeholder="Salario" required>
+                    </div>
+                    <input type="hidden" name="tipo_usuario" value="empleado">
+                    <div>
+                        <button type="submit" class="btn login-button" name="registrar">Registrar Empleado</button>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="mt-3 text-center">
+                <a href="../../index.php" class="btn btn-link">Volver</a>
             </div>
-
-            <button type="submit" class="btn-registro">Registrarse</button>
-        </form>
+        </div>
     </div>
 
-    <script>
-        // Script para mostrar/ocultar campos de cliente
-        document.querySelectorAll('input[name="tipo_registro"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const camposCliente = document.querySelector('.campos-cliente');
-                if (this.value === 'cliente') {
-                    camposCliente.classList.add('mostrar');
-                    // Hacer campos obligatorios
-                    camposCliente.querySelectorAll('input').forEach(input => {
-                        input.required = true;
-                    });
-                } else {
-                    camposCliente.classList.remove('mostrar');
-                    // Quitar obligatoriedad de campos
-                    camposCliente.querySelectorAll('input').forEach(input => {
-                        input.required = false;
-                    });
-                }
-            });
-        });
-    </script>
+<?php
+if (isset($_POST['registrar'])) {
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password_confirm = $_POST['password_confirm'];
+    $rol = $_POST['rol'];
+    $salario = $_POST['salario'];
+    $tipo_usuario = $_POST['tipo_usuario'];
+
+    // Validaciones
+    $errores = [];
+
+    if (empty($nombre)) $errores[] = "El nombre es obligatorio";
+    if (empty($apellido)) $errores[] = "El apellido es obligatorio";
+    if (empty($email)) $errores[] = "El email es obligatorio";
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errores[] = "Email no válido";
+    if (empty($password)) $errores[] = "La contraseña es obligatoria";
+    if ($password !== $password_confirm) $errores[] = "Las contraseñas no coinciden";
+    if (empty($rol)) $errores[] = "El rol es obligatorio";
+    if (empty($salario)) $errores[] = "El salario es obligatorio";
+    if (!is_numeric($salario) || $salario <= 0) $errores[] = "El salario debe ser un número positivo";
+
+    if (empty($errores)) {
+        $db = conectarDB();
+        
+        try {
+            mysqli_begin_transaction($db);
+
+            // Verificar si el email ya existe
+            $query = "SELECT id FROM usuarios WHERE email = ?";
+            $stmt = mysqli_prepare($db, $query);
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_execute($stmt);
+            $resultado = mysqli_stmt_get_result($stmt);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                throw new Exception("El email ya está registrado");
+            }
+
+            // Insertar en la tabla usuarios
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO usuarios (nombre, apellido, email, password, tipo_usuario) 
+                     VALUES (?, ?, ?, ?, ?)";
+            
+            $stmt = mysqli_prepare($db, $query);
+            mysqli_stmt_bind_param($stmt, "sssss", $nombre, $apellido, $email, $password_hash, $tipo_usuario);
+            
+            if (!mysqli_stmt_execute($stmt)) {
+                throw new Exception("Error al registrar usuario");
+            }
+
+            $usuario_id = mysqli_insert_id($db);
+
+            // Insertar en la tabla empleados
+            $estado = 'activo'; // Por defecto activo
+            $query = "INSERT INTO empleados (usuario_id, rol, salario, estado) 
+                     VALUES (?, ?, ?, ?)";
+            
+            $stmt = mysqli_prepare($db, $query);
+            mysqli_stmt_bind_param($stmt, "isds", $usuario_id, $rol, $salario, $estado);
+            
+            if (!mysqli_stmt_execute($stmt)) {
+                throw new Exception("Error al registrar empleado");
+            }
+
+            mysqli_commit($db);
+            echo "<script>
+                alert('Empleado registrado exitosamente');
+                window.location.href='../../index.php';
+            </script>";
+
+        } catch (Exception $e) {
+            mysqli_rollback($db);
+            echo "<script>
+                alert('Error: " . $e->getMessage() . "');
+            </script>";
+        }
+    } else {
+        foreach ($errores as $error) {
+            echo "<script>
+                alert('$error');
+            </script>";
+        }
+    }
+}
+?>
+
+<?php incluirTemplate('footer'); ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
