@@ -85,7 +85,13 @@
                     <li class="nav-item">
                     <a class="nav-link" href="contacto.php">Contactos</a>
                     </li>
-                    <li class="nav-item">
+                    
+                    <?php if($auth):?>
+                                <li><a class="nav-link" href="cerrarsesion2.php">Cerrar Sesión</a></li>
+                            <?php else: ?>
+                                <li><a class="nav-link" href="login.php">Iniciar Sesión</a> </li>
+                                <?php endif;?>
+                                <li class="nav-item">
                     <a class="nav-link" href="carrito.php">
                         <i class="fas fa-shopping-cart"></i>Carrito
                         <?php
@@ -97,11 +103,6 @@
                         ?>
                     </a>
                 </li>
-                    <?php if($auth):?>
-                                <li><a class="nav-link" href="cerrarsesion2.php">Cerrar Sesión</a></li>
-                            <?php else: ?>
-                                <li><a class="nav-link" href="login.php">Iniciar Sesión</a> </li>
-                                <?php endif;?>
                     </ul>
                 </div>
            </div>

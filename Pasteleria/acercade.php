@@ -20,7 +20,7 @@
     <section class="mb-5">
         <div class="card border-0 shadow-sm p-4 historia-card">
             <h2 class="text-center mb-4">Nuestra Historia</h2>
-            <p class="text-muted">Nuestra deliciosa historia nace el año 1975 en lo que solía ser el pueblo pequeño de Santa Cruz, Bolivia. Con mucho cariño y buen gusto, Carla y Fernando, fusionaron los gustos cruceños con los de su hogar, Austria. Valorando la tradición y el sabor del arte de la pastelería, Fridolin se convirtió en la cadena pastelera más grande de nuestro país.</p>
+            <p class="text-muted">Nuestra deliciosa historia nace el año 1975 en lo que solía ser el pueblo pequeño de La Paz, Bolivia. Con mucho cariño y buen gusto, Marcos y Fernando, fusionaron los gustos tradicionales con los de su hogar, Austria. Valorando la tradición y el sabor del arte de la pastelería, Collita se convirtió en la cadena pastelera más grande de nuestro país.</p>
         </div>
     </section>
 
@@ -33,7 +33,7 @@
                         <i class="fas fa-heart"></i>
                     </div>
                     <h3 class="card-title">Misión</h3>
-                    <p class="card-text">Crear momentos inolvidables a través de nuestros productos artesanales, ofreciendo la más alta calidad en pastelería y repostería, mientras mantenemos viva la tradición y la innovación en cada creación.</p>
+                    <p class="card-text">Crear momentos inolvidables a través de nuestros productos artesanales, ofreciendo la más alta calidad en pastelería y repostería, mientras mantenemos viva la tradición y la innovación en cada creación mediante ventas en linea.</p>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <h3 class="card-title">Visión</h3>
-                    <p class="card-text">Ser reconocidos como la pastelería líder en innovación y calidad en Bolivia, expandiendo nuestra presencia mientras mantenemos la esencia artesanal que nos caracteriza.</p>
+                    <p class="card-text">Ser reconocidos como la pastelería líder en innovación y calidad en Bolivia, expandiendo nuestra presencia mientras mantenemos la esencia artesanal que nos caracteriza de manera rapida.</p>
                 </div>
             </div>
         </div>
@@ -58,6 +58,7 @@
                     </div>
                     <h3 class="card-title">Objetivos</h3>
                     <ul class="list-unstyled text-left">
+                    <li>🎯Delivery Inmediato</li>
                         <li>🎯 Mantener la excelencia en calidad</li>
                         <li>🎯 Innovar en sabores y diseños</li>
                         <li>🎯 Expandir nuestra presencia nacional</li>
@@ -68,11 +69,11 @@
         </div>
     </section>
 
-    <!-- [Resto del código existente...] -->
+
 </main>
 
 <style>
-/* Estilos adicionales para las nuevas secciones */
+
 .historia-card {
     background: linear-gradient(135deg, #fff9f9, #fff5f5);
     border-radius: 15px;

@@ -33,6 +33,14 @@ if (isset($_SESSION['usuario_id'])) {
     mysqli_stmt_execute($stmt);
     $resultado = mysqli_stmt_get_result($stmt);
     $cliente = mysqli_fetch_assoc($resultado);
+
+    if (!$cliente) {
+        echo "<script>
+            alert('No se encontraron datos del cliente');
+            window.location.href = 'index.php';
+        </script>";
+        exit;
+    }
 }
 ?>
 <!DOCTYPE html>

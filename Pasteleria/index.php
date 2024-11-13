@@ -27,39 +27,154 @@
     incluirTemplate('header');
 ?>
 
-<section class="banner container-fluid p-0">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height:400px;">
-        <div class="carousel-inner" style="height:100%;">
-            <div class="carousel-item active" style="height:100%; background:url('images/fondo.jpg') center/cover no-repeat;">
-                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black;background-color: rgba(255, 255, 255, 0.4);">
-                    <h1>LA PASTELERIA Collita</h1>
-                    <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
-                    <a href="productos.php" class="btn btn-primary">Ver menú</a>
+<style>
+    .hero-banner {
+        position: relative;
+        height: 600px;
+        overflow: hidden;
+    }
+
+    .carousel-item {
+        height: 600px;
+        position: relative;
+    }
+
+    .carousel-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4));
+    }
+
+    .banner-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 80%;
+        max-width: 800px;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+    }
+
+    .banner-text h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .banner-text p {
+        font-size: 1.2rem;
+        color: #34495e;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .btn-menu {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        background: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-menu:hover {
+        background: #c0392b;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+        opacity: 0.7;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .hero-banner {
+            height: 500px;
+        }
+
+        .carousel-item {
+            height: 500px;
+        }
+
+        .banner-text {
+            width: 70%;
+            padding: 1.2rem;
+        }
+
+        .banner-text h1 {
+            font-size: 2rem;
+        }
+
+        .banner-text p {
+            font-size: 1rem;
+        }
+
+        .btn-menu {
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<section class="hero-banner">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background: url('images/fondo.jpg') center/cover no-repeat;">
+                <div class="banner-text">
+                    <h1>La Pastelería "El Collita"</h1>
+                    <p>Descubre el arte de la repostería tradicional con recetas que han pasado de generación en generación, 
+                       creando momentos dulces inolvidables has tu pedido con un solo clic </p>
+                    <a href="productos.php" class="btn btn-menu">Explorar Productos</a>
                 </div>
             </div>
-            <div class="carousel-item" style="height:100%; background:url('images/fondo2.jpg') center/cover no-repeat;">
-                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black; background-color: rgba(255, 255, 255, 0.4);">
-                    <h1>LA PASTELERIA Collita</h1>
-                    <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
-                    <a href="productos.php" class="btn btn-primary">Ver menú</a>
+            <div class="carousel-item" style="background: url('images/fondo2.jpg') center/cover no-repeat;">
+                <div class="banner-text">
+                    <h1>Sabores Artesanales</h1>
+                    <p>Cada postre es una obra maestra elaborada con los ingredientes más frescos y el cariño de siempre.</p>
+                    <a href="productos.php" class="btn btn-menu">Ver Creaciones</a>
                 </div>
             </div>
-            <div class="carousel-item" style="height:100%; background:url('images/fondo3.jpg') center/cover no-repeat;">
-                <div class="banner-text" style="position:absolute; top:70%; left:50%; transform: translate(-50%,-50%); text-align:center; color:black; background-color: rgba(255, 255, 255, 0.4);">
-                    <h1>LA PASTELERIA Collita</h1>
-                    <p>Restaurante del mejor sabor y la mayor calidez con recetas que van de generación en generación</p>
-                    <a href="productos.php" class="btn btn-primary">Ver menú</a>
+            <div class="carousel-item" style="background: url('images/fondo3.jpg') center/cover no-repeat;">
+                <div class="banner-text">
+                    <h1>Dulces Momentos</h1>
+                    <p>Hacemos de cada celebración un momento especial con nuestros pasteles y postres artesanales.</p>
+                    <a href="productos.php" class="btn btn-menu">Hacer Pedido</a>
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
     </div>
 </section>
 
