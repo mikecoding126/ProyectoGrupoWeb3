@@ -179,49 +179,55 @@
 </section>
 
 <?php
-
 require 'includes/config/database.php';
 $db = conectarDB();
 ?>
-   <div style="padding: 70px; padding-top: 10px; padding-bottom: 10px;">
-        <h1 class="my-4">Los más populares</h1>
-    </div>
-    
-    <div class="container text-center">
-    <div class="row align-items-center">
-    <?php
-$sql = "SELECT * FROM productos LIMIT 8";
-$result = $db->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $nombre = $row['nombre'];
-        $descripcion = $row['descripcion'];
-        $precio = $row['precio'];
-        $imagen = 'admin/productos/imagenes/' . $row['imagen'];
-        echo '<div class="col-md-3">';
-        echo '<div class="card m-2" style="width: 18rem;">';
-        echo '<img src="'.$imagen.'" class="card-img-top" alt="'.$nombre.'">';
-        
-        echo '<div class="card-body">';
-        echo '<h5 class="card-title">'.$nombre.'</h5>';
-        echo '<p class="card-text">'.$descripcion.'</p>';
-        echo '<p class="card-text" style="color: red; font-size: larger;">Bs. ' . $precio . '</p>';
-        echo '<a href="productos.php?id='.$row['id'].'" class="btn btn-success">Ver más</a>';
-?>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#carritoModal">Carrito</button>
-                <?php
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
-            }
-        } else {
-            echo 'No se encontraron productos.';
-        }
-        $result->free_result();
-        ?>
-    </div>
+<div style="padding: 70px; padding-top: 10px; padding-bottom: 10px;">
+    <h1 class="my-4">Los más populares</h1>
 </div>
 
+<div class="container text-center">
+    <div class="row align-items-center">
+    <?php
+    $sql = "SELECT * FROM productos LIMIT 8";
+    $result = $db->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $nombre = $row['nombre'];
+            $descripcion = $row['descripcion'];
+            $precio = $row['precio'];
+            $imagen = 'admin/productos/imagenes/' . $row['imagen'];
+            echo '<div class="col-md-3">';
+            echo '<div class="card m-2" style="width: 18rem;">';
+            echo '<img src="'.$imagen.'" class="card-img-top" alt="'.$nombre.'">';
+            
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">'.$nombre.'</h5>';
+            echo '<p class="card-text">'.$descripcion.'</p>';
+            echo '<p class="card-text" style="color: red; font-size: larger;">Bs. ' . $precio . '</p>';
+            echo '<a href="productos.php?id='.$row['id'].'" class="btn btn-success">Ver más</a>';
+            ?>
+            <form action="admin/includes/carrito.php" method="post" class="d-inline">
+                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                <input type="hidden" name="nombre" value="<?php echo $nombre; ?>">
+                <input type="hidden" name="precio" value="<?php echo $precio; ?>">
+                <input type="hidden" name="action" value="agregar">
+                <button type="submit" class="btn btn-primary">
+                    Agregar al carrito
+                </button>
+            </form>
+            <?php
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+    } else {
+        echo 'No se encontraron productos.';
+    }
+    $result->free_result();
+    ?>
+    </div>
+</div>
 
 <?php
     incluirTemplate("footer");

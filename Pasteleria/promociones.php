@@ -107,18 +107,28 @@
             while ($reg = mysqli_fetch_assoc($res)) {
                 ?>
 
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 anuncio">
-                        <img src="admin/promociones/imagenes/<?php echo $reg['imagen']; ?>" class="card-img-top" alt="<?php echo $reg['nombre']; ?>">
-                        <div class="card-body text-center">
-                            <h5 class="card-title"><?php echo $reg['nombre']; ?></h5>
-                            <p class="card-text"><?php echo $reg['descripcion']; ?></p>
-                            <p class="card-text"><?php echo  'FehaFin '.$reg['fecha_fin']; ?></p>
-                            <p class="card-text"><?php echo 'MontoDescuento '. $reg['monto_descuento']; ?></p>
-                            <p class="precio card-text">Bs.-<?php echo $reg['precio']; ?></p>
-                        </div>
-                    </div>
-                </div>
+<div class="col-md-4 mb-4">
+    <div class="card h-100 anuncio">
+        <img src="admin/promociones/imagenes/<?php echo $reg['imagen']; ?>" class="card-img-top" alt="<?php echo $reg['nombre']; ?>">
+        <div class="card-body text-center">
+            <h5 class="card-title"><?php echo $reg['nombre']; ?></h5>
+            <p class="card-text"><?php echo $reg['descripcion']; ?></p>
+            <p class="card-text"><?php echo 'FechaFin '.$reg['fecha_fin']; ?></p>
+            <p class="card-text"><?php echo 'MontoDescuento '. $reg['monto_descuento']; ?></p>
+            <p class="precio card-text">Bs.-<?php echo $reg['precio']; ?></p>
+            
+            <form action="admin/includes/carrito.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $reg['id']; ?>">
+                <input type="hidden" name="nombre" value="<?php echo $reg['nombre']; ?>">
+                <input type="hidden" name="precio" value="<?php echo $reg['precio']; ?>">
+                <input type="hidden" name="action" value="agregar">
+                <button type="submit" class="btn btn-success">
+                    Agregar al carrito
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
             <?php
             }

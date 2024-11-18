@@ -176,7 +176,7 @@
                         
                         <?php if($reg['stock'] > 0): ?>
                             <form action="admin/includes/carrito.php" method="post">
-                                <input type="hidden" name="id" value="<?php echo $reg['codigo_producto']; ?>">
+                            <input type="hidden" name="id" value="<?php echo $reg['id']; ?>">
                                 <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($reg['nombre']); ?>">
                                 <input type="hidden" name="precio" value="<?php echo $reg['precio']; ?>">
                                 <input type="hidden" name="action" value="agregar">
