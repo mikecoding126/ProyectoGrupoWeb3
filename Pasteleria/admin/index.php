@@ -111,6 +111,8 @@ incluirTemplate('Header');
         
         
         <a href="./proveedor/listado.php" class="boton boton-azul">Proveedores</a>
+        
+        <a href="./pedidos/ver_pedidos.php" class="boton boton-rojo">Pedidos</a>
 
         
     </div>

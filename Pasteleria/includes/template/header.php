@@ -107,7 +107,7 @@
                                 <li class="nav-item">      
                 <?php if (isset($_SESSION['usuario_id'])): ?>
                     <?php if (isset($_SESSION['tipo_usuario']) && $_SESSION['tipo_usuario'] === 'empleado'): ?>
-                        <a class="nav-link" href="admin/procesar_pedidos.php">Proceder con pedidos</a>
+                        <a class="nav-link" href="pedidos/ver_pedidos.php">Proceder con pedidos</a>
                     <?php else: ?>
                         <a class="nav-link" href="mis_pedidos.php">Mis Pedidos</a>
                     <?php endif; ?>
