@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 20:21:32
+-- Tiempo de generación: 27-11-2024 a las 22:22:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -48,7 +48,8 @@ INSERT INTO `categorias` (`id`, `categoria`, `estado`) VALUES
 (8, 'Galletas', 'activo'),
 (9, 'Panes Dulces', 'activo'),
 (10, 'Pastel', 'activo'),
-(33, 'papel', 'activo');
+(34, 'pasteles2', 'activo'),
+(37, '12', 'activo');
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,10 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id`, `usuario_id`, `nombre`, `apellido`, `telefono`, `direccion`, `fecha_registro`, `tipo_cliente`, `estado`) VALUES
 (1, 4, '', '', '4', 'asc', '2024-11-12 17:12:25', 'minorista', 'activo'),
-(2, 6, '', '', '707007070', 'Av Arce n2', '2024-11-12 17:20:40', 'minorista', 'activo');
+(2, 6, '', '', '707007070', 'Av Arce n2', '2024-11-12 17:20:40', 'minorista', 'activo'),
+(3, 7, '', '', '70400560', 'Av. Juan de la Riva ', '2024-11-13 01:32:16', 'minorista', 'activo'),
+(4, 10, '', '', '8', '8', '2024-11-13 14:20:54', 'minorista', 'activo'),
+(5, 13, '', '', '60504070', 'Av PanoramaN35', '2024-11-18 12:39:24', 'minorista', 'activo');
 
 -- --------------------------------------------------------
 
@@ -90,6 +94,24 @@ CREATE TABLE `detalles_pedidos` (
   `precio_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detalles_pedidos`
+--
+
+INSERT INTO `detalles_pedidos` (`id`, `pedido_id`, `producto_id`, `cantidad`, `precio_unitario`) VALUES
+(3, 23, 4, 1, 180.00),
+(4, 24, 1, 1, 20.00),
+(5, 25, 16, 1, 48.00),
+(6, 26, 1, 1, 20.00),
+(7, 27, 1, 1, 20.00),
+(8, 28, 7, 1, 7.00),
+(9, 29, 3, 1, 168.00),
+(10, 30, 4, 1, 3.00),
+(11, 31, 6, 2, 160.00),
+(12, 32, 3, 1, 168.00),
+(13, 33, 1, 1, 20.00),
+(14, 34, 3, 1, 168.00);
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +126,15 @@ CREATE TABLE `empleados` (
   `estado` enum('activo','inactivo') DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `usuario_id`, `rol`, `salario`, `estado`) VALUES
+(1, 9, '', 1000.00, 'activo'),
+(2, 11, '', 2000.00, 'activo'),
+(3, 12, '', 11.00, 'activo');
+
 -- --------------------------------------------------------
 
 --
@@ -115,15 +146,29 @@ CREATE TABLE `pedidos` (
   `cliente_id` int(11) NOT NULL,
   `estado` enum('nuevo','espera','enviado') DEFAULT 'nuevo',
   `fecha_pedido` timestamp NOT NULL DEFAULT current_timestamp(),
-  `fecha_entrega` date DEFAULT NULL
+  `fecha_entrega` date DEFAULT NULL,
+  `direccion_envio` varchar(255) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `comentarios` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `cliente_id`, `estado`, `fecha_pedido`, `fecha_entrega`) VALUES
-(1, 2, 'nuevo', '2024-11-12 17:24:33', NULL);
+INSERT INTO `pedidos` (`id`, `cliente_id`, `estado`, `fecha_pedido`, `fecha_entrega`, `direccion_envio`, `telefono`, `comentarios`) VALUES
+(23, 2, 'nuevo', '2024-11-18 11:32:06', NULL, 'Av Arce n2', '707007070', ''),
+(24, 2, 'enviado', '2024-11-18 11:33:36', '2024-11-18', 'Av Arce n2', '707007070', ''),
+(25, 2, 'enviado', '2024-11-18 11:34:53', '2024-11-18', 'Av Arce n2', '707007070', 'dcvs'),
+(26, 3, 'nuevo', '2024-11-18 11:46:37', NULL, 'Av. Juan de la Riva ', '70400560', 'ok'),
+(27, 3, 'nuevo', '2024-11-18 12:03:57', NULL, 'Av. Juan de la Riva ', '70400560', ''),
+(28, 3, 'nuevo', '2024-11-18 12:28:23', NULL, 'Av. Juan de la Riva ', '70400560', ''),
+(29, 3, 'nuevo', '2024-11-18 12:29:24', NULL, 'Av. Juan de la Riva ', '70400560', ''),
+(30, 3, 'enviado', '2024-11-18 12:34:35', '2024-11-18', 'Av. Juan de la Riva ', '70400560', ''),
+(31, 5, 'enviado', '2024-11-18 12:39:45', '2024-11-18', 'Av PanoramaN35', '60504070', ''),
+(32, 5, 'enviado', '2024-11-18 12:50:02', '2024-11-18', 'Av PanoramaN35', '60504070', ''),
+(33, 5, 'enviado', '2024-11-18 14:29:21', '2024-11-18', 'Av PanoramaN35', '60504070', 'lo mas rapido posible'),
+(34, 2, 'nuevo', '2024-11-18 15:07:28', NULL, 'Av Arce n2', '707007070', 'bueno');
 
 -- --------------------------------------------------------
 
@@ -150,13 +195,13 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo_producto`, `nombre`, `descripcion`, `categoria_id`, `precio`, `imagen`, `estado`, `stock`, `unidad_medida`, `proveedor_id`) VALUES
-(1, '123456', 'Tarta Crema Café', 'Base de café con crema pastelera infusionada en expresso, capas de bizcocho de chocolate con un toque de vainilla y decorada con caramelo salado y un suave glaseado de latte.', 1, 20.00, 'Tarta-CremaCafe.png', 'nodisponible', 99, 'unidades', 1),
+(1, '123456', 'Tarta Crema Café', 'Base de café con crema pastelera infusionada en expresso, capas de bizcocho de chocolate con un toque de vainilla y decorada con caramelo salado y un suave glaseado de latte.', 1, 20.00, 'Tarta-CremaCafe.png', 'disponible', 95, 'unidades', 1),
 (2, 'TART-002', 'Tarta Vainilla-Choco', 'Bizcocho de vainilla entrelazado con capas de chocolate, relleno de crema de frutilla y cubierto con una delicada capa de ganache de chocolate.', 2, 102.00, 'Tarta-VainillaChoco.png', 'nodisponible', 10, 'Unidad', 1),
-(3, 'TART-003', 'Tarta Cookies & Cream', 'Deliciosa combinación de bizcocho de chocolate relleno con una suave crema de galleta Oreo, cubierto con merengue italiano y ganache de chocolate, decorado con galletas Oreo.', 2, 168.00, 'Tarta-CookiesNcream.png', 'disponible', 10, 'Unidad', 1),
-(4, 'TART-004', 'Tarta Rosa Oscura', 'Bizcocho de chocolate esponjoso, con tres capas de crema de chocolate oscuro, decorado con pétalos de chocolate en forma de rosa. Para 12 personas.', 2, 180.00, 'Tarta-RosaOscura.png', 'disponible', 10, 'Unidad', 1),
+(3, 'TART-003', 'Tarta Cookies & Cream', 'Deliciosa combinación de bizcocho de chocolate relleno con una suave crema de galleta Oreo, cubierto con merengue italiano y ganache de chocolate, decorado con galletas Oreo.', 2, 168.00, 'Tarta-CookiesNcream.png', 'disponible', 7, 'Unidad', 1),
+(4, 'TART-004', 'Tarta Rosa Oscura', 'Bizcocho de chocolate esponjoso, con tres capas de crema de chocolate oscuro, decorado con pétalos de chocolate en forma de rosa. Para 12 personas.', 2, 180.00, 'Tarta-RosaOscura.png', 'disponible', 8, 'Unidad', 1),
 (5, 'PACK-001', 'Pack Fiesta Chico', 'Incluye 9 aperitivos: cuñape, empanada de pollo, empanada de queso, y empanada de carne.', 3, 58.00, 'Pack-FiestaChico.jpeg', 'disponible', 10, 'Pack', 1),
-(6, 'PACK-002', 'Pack Fiesta Grande', 'Incluye 24 aperitivos: cuñape, empanadas grandes de pollo, queso, y carne, acompañado de una gaseosa de 2 litros.', 3, 160.00, 'Pack-FiestaGrande.jpeg', 'nodisponible', 10, 'Pack', 1),
-(7, 'CUN-001', 'Cuñape Delicia', 'Cuñapes crocantes por unidad, perfectos para cualquier ocasión.', 4, 7.00, 'CuñapeDelicia.jpg', 'disponible', 50, 'Unidad', 1),
+(6, 'PACK-002', 'Pack Fiesta Grande', 'Incluye 24 aperitivos: cuñape, empanadas grandes de pollo, queso, y carne, acompañado de una gaseosa de 2 litros.', 3, 160.00, 'Pack-FiestaGrande.jpeg', 'nodisponible', 8, 'Pack', 1),
+(7, 'CUN-001', 'Cuñape Delicia', 'Cuñapes crocantes por unidad, perfectos para cualquier ocasión.', 4, 7.00, 'CuñapeDelicia.jpg', 'disponible', 49, 'Unidad', 1),
 (8, 'TART-005', 'Tarta Moka Caramelo', 'Bizcocho de chocolate suave con capas de crema de moka y caramelo salado, cubierto con una ganache de café.', 2, 145.00, 'Tarta-MokaCaramelo.png', 'disponible', 10, 'Unidad', 1),
 (9, 'TART-006', 'Tarta Limón Merengue', 'Base de galleta con un relleno de crema de limón y cubierto con un merengue italiano gratinado.', 2, 120.00, 'Tarta-LimonMerengue.png', 'disponible', 10, 'Unidad', 1),
 (10, 'TART-007', 'Tarta Red Velvet', 'Bizcocho rojo aterciopelado con capas de crema de queso y un ligero toque de vainilla, decorada con migas de Red Velvet.', 2, 155.00, 'Tarta-VelvetRojo.png', 'disponible', 10, 'Unidad', 1),
@@ -165,7 +210,7 @@ INSERT INTO `productos` (`id`, `codigo_producto`, `nombre`, `descripcion`, `cate
 (13, 'TART-010', 'Tarta Matcha', 'Delicada tarta de té verde matcha con capas de bizcocho de vainilla y crema de matcha, decorada con polvo de té verde.', 2, 165.00, 'Tarta-Matcha.png', 'disponible', 10, 'Unidad', 1),
 (14, 'CUP-001', 'Cupcake de Vainilla', 'Cupcake esponjoso de vainilla con glaseado de crema de mantequilla de vainilla y decorado con sprinkles de colores.', 5, 35.00, 'Cupcake-Vainilla.png', 'disponible', 20, 'Unidad', 1),
 (15, 'CUP-002', 'Cupcake de Chocolate', 'Cupcake de chocolate intenso con glaseado de crema de cacao, decorado con virutas de chocolate.', 5, 38.00, 'Cupcake-Choco.png', 'disponible', 20, 'Unidad', 1),
-(16, 'BRW-001', 'Brownie de Nuez', 'Brownie de chocolate oscuro con trozos de nuez, cubierto con un glaseado de chocolate.', 6, 48.00, 'Brownie-Nuez.png', 'disponible', 15, 'Unidad', 1),
+(16, 'BRW-001', 'Brownie de Nuez', 'Brownie de chocolate oscuro con trozos de nuez, cubierto con un glaseado de chocolate.', 6, 48.00, 'Brownie-Nuez.png', 'disponible', 14, 'Unidad', 1),
 (17, 'BRW-002', 'Brownie Dulce de Leche', 'Brownie esponjoso con un centro de dulce de leche, decorado con hilos de caramelo.', 6, 50.00, 'Brownie-DulceLeche.png', 'disponible', 15, 'Unidad', 1),
 (18, 'CHE-001', 'Cheesecake de Frutilla', 'Base de galleta con un relleno suave de queso crema y frutillas frescas, decorado con coulis de frutilla.', 7, 150.00, 'Cheesecake-Frutilla.png', 'disponible', 10, 'Unidad', 1),
 (19, 'CHE-002', 'Cheesecake de Chocolate', 'Cheesecake cremoso con base de galleta de chocolate, decorado con ganache de chocolate oscuro y virutas de chocolate.', 7, 160.00, 'Cheesecake-Chocolate.png', 'disponible', 10, 'Unidad', 1),
@@ -195,7 +240,10 @@ INSERT INTO `productos` (`id`, `codigo_producto`, `nombre`, `descripcion`, `cate
 (44, 'GAL-005', 'Galletas de M&M', 'Galletas repletas de coloridos M&M para los amantes del chocolate', 8, 9.99, 'galletas_mm.jpg', 'disponible', 22, 'Docena', 2),
 (45, 'PAN-003', 'Pan de Plátano', 'Pan esponjoso con sabor a plátano y nueces troceadas', 9, 7.99, 'pan_platano.jpg', 'disponible', 15, 'Unidad', 1),
 (46, 'PAN-004', 'Pan de Canela', 'Pan dulce de canela con un glaseado dulce por encima', 9, 6.50, 'pan_canela.jpg', 'disponible', 10, 'Unidad', 1),
-(47, 'CUP-005', 'Cupcake de Chocolate', 'Irresistible cupcake de chocolate con ganache de chocolate', 5, 5.50, 'cupcake_chocolate.jpg', 'disponible', 12, 'Unidad', 1);
+(47, 'CUP-005', 'Cupcake de Chocolate', 'Irresistible cupcake de chocolate con ganache de chocolate', 5, 5.50, 'cupcake_chocolate.jpg', 'disponible', 12, 'Unidad', 1),
+(58, '123DSV', 'producto1', 'asfafvs', 8, 10.00, 'logo.jpeg', 'nodisponible', 10, 'Unidad', 1),
+(59, 'KHIHJBK', '1', '1', 37, 1.00, 'logo.jpeg', 'disponible', 1, 'Unidad', 3),
+(60, 'GYKHBLKHKk', '12', '12', 37, 212.00, 'logo.jpeg', 'disponible', 1, 'Unidad', 2);
 
 -- --------------------------------------------------------
 
@@ -230,7 +278,8 @@ INSERT INTO `promociones` (`id`, `imagen`, `nombre`, `producto_id`, `precio`, `d
 (6, 'empanada3.jpg', 'Empanadas de Queso', 6, 2.00, 'Deliciosas empanadas de queso económicas por unidad.', 'activa', '2024-10-01', '2024-10-31', 7.00, 0.40),
 (11, 'torta.jpg', 'Torta Mini', 8, 1.00, 'Torta mini sencilla', 'activa', '2024-10-01', '2024-10-31', 10.00, 1.50),
 (20, 'Captura de pantalla 2024-11-11 131155.png', '1', 3, 1.00, '1', 'inactiva', '2024-11-11', '2024-11-14', 1.00, 1.00),
-(21, 'IMAGEN4.png', '1', 34, 11.00, '1', 'activa', '2024-11-11', '2024-11-20', 1.00, 1.00);
+(21, 'IMAGEN4.png', '1', 34, 11.00, '1', 'inactiva', '2024-11-11', '2024-11-20', 1.00, 1.00),
+(22, 'Captura de pantalla 2024-11-11 131155.png', '11', 60, 1.00, '11', 'activa', '2024-11-13', '2024-11-15', 11.00, 1.00);
 
 -- --------------------------------------------------------
 
@@ -256,7 +305,7 @@ INSERT INTO `proveedores` (`id`, `nombre`, `telefono`, `correo`, `direccion`, `e
 (2, 'Cocacola', '756949130', 'CocacolaBolivia@gmail.com', 'Av Centenenario Z. Central  #165', 'promocionado'),
 (3, 'Ricardo', '70849512', 'bakersLapaz@gmail.com', 'Av Tawantisuyu Z Norte Calle 12', 'no_promocionado'),
 (4, '', '70705040', 'prueba99@gmail.com', 'Av Litoral N45', 'no_promocionado'),
-(5, '', '808', 'aca@gmail.com', 'Av dos', 'no_promocionado');
+(8, '12', '12', '12@mbvgm', '12', 'no_promocionado');
 
 -- --------------------------------------------------------
 
@@ -280,11 +329,17 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `password`, `tipo_usuario`, `estado`) VALUES
 (1, 'Prueba', 'prueba', 'prueba@gmail.com', '$2y$10$Ae3TFAj9gFYZQInsWZEiKO6qsLGO01HJMxUVCZsqPQJgVCwcoI1Ju', 'cliente', 'activo'),
-(2, '1', '1', '1@gmail.com', '$2y$10$XACXFRT6G8sm/7/ZSQwviedoTvTgZI4HTsbpy/1GNXRvtGEu2iZoa', 'empleado', 'inactivo'),
-(3, 'r', 'sd', 'dd@sdv', '$2y$10$vby6U0/lrS/RSG1.WBofiOOyXtgs69G79l6UuXvCJlAY3v3kF13Tu', 'cliente', 'activo'),
+(2, '1', '1', '1@gmail.com', '$2y$10$BHKU8ldPpnryc/gl.78vCOmVv5wOQ0P0y1wPZnYY88wvg5t/zj4w.', 'empleado', 'activo'),
+(3, 'r', 'sd', 'dd@sdv', '$2y$10$vby6U0/lrS/RSG1.WBofiOOyXtgs69G79l6UuXvCJlAY3v3kF13Tu', 'cliente', 'inactivo'),
 (4, 'wegew', 'sgwe', 'sgwe@gmail.com', '$2y$10$jHqkjBIw5d5YsF6Zo96/i.j0HKsbhZ6AoRjaooEws6Gv6FkcRc5ym', 'cliente', 'activo'),
 (5, 'none', 'none', 'none@gmail.com', '$2y$10$nNK.o.b2v0.2IlUD3IjmJeAQlwMtAttjlqvwoS0.144EawsMk87gG', 'cliente', 'activo'),
-(6, 'pedro', 'rios', 'pedro@gmail.com', '$2y$10$P2Eabo2ms4P7d2ewLbAXdusmfRGQVrWOZ1WHD1QQOK2MMiuPZ1GjK', 'cliente', 'activo');
+(6, 'pedro', 'rios', 'pedro@gmail.com', '$2y$10$P2Eabo2ms4P7d2ewLbAXdusmfRGQVrWOZ1WHD1QQOK2MMiuPZ1GjK', 'cliente', 'activo'),
+(7, 'Lucas', 'Andi', 'prueba2@gmail.com', '$2y$10$6UVsMxwiBEhT/SRBLgOcBO2kocuP3AnXWiDwtQd05lKZJNYBANVry', 'cliente', 'activo'),
+(9, 'lcuas', 'Calle', '2@gmail.com', '$2y$10$Wr.uyIECnrcVrdKcGQVULueoDN7D0cqXUjmailsT.2PaaOsRfd.pO', 'empleado', 'activo'),
+(10, '8', '8', '8@8', '$2y$10$G2gtml4Ix4/CFYmgow2zQeIH9olxEdGonRrn0TrIH3QCYwyEZ5cEO', 'cliente', 'activo'),
+(11, 'admin', 'admin', 'admin@gmail.com', '$2y$10$lam9VnvD7SucyBqf9T4fsu61DUdGsF2M0UcRRXEFF42l9Qi35jZDy', 'empleado', 'activo'),
+(12, '1', '1', '1@kjnkbjgmail.com', '$2y$10$cQFv3ixf7IGu57.KTaEr2.Ztx5lP0G97teW0YNezcZzoCenkLEBmu', 'empleado', 'activo'),
+(13, 'prueba3', 'calle', 'prueba3@gmail.com', '$2y$10$BYIhraHBWXFmckP6GdDfIeFYOcffNc8gxtCIqP9HGSJmvscscIltm', 'cliente', 'activo');
 
 --
 -- Índices para tablas volcadas
@@ -362,55 +417,55 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles_pedidos`
 --
 ALTER TABLE `detalles_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `promociones`
 --
 ALTER TABLE `promociones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas

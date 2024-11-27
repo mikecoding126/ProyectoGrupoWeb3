@@ -1,9 +1,9 @@
 <?php
-    /*if(!isset($_SESSION)){
+    if(!isset($_SESSION)){
         session_start();
     }
     $auth=$_SESSION['login']??false;
-    //var_dump($auth);*/
+    //var_dump($auth);s
 ?>
 <header>
     <!-- Bootstrap CSS v5.2.1 -->

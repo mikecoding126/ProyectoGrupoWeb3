@@ -1,11 +1,15 @@
 <?php
-session_start();
-$auth = $_SESSION['login'];
-if (!$auth) {
-    header("Location:/pasteleria");
-}
-require_once('../../includes/config/database.php');
-$db = conectarDB();
+    session_start();
+    $auth = $_SESSION['login'];
+    if(!$auth){
+        header("Location:/pasteleria");
+    }
+    require '../../includes/config/database.php';
+    $db = conectarDB();
+
+    require '../../includes/funciones.php';
+    incluirTemplate('header');
+
 
 // Procesar la actualización del estado si se recibe una solicitud
 if (isset($_POST['actualizar_estado'])) {
@@ -23,8 +27,7 @@ if (isset($_POST['actualizar_estado'])) {
     }
 }
 
-require_once('../../includes/funciones.php');
-incluirTemplate('header');
+
 ?>
 
 <!DOCTYPE html>
@@ -117,4 +120,3 @@ incluirTemplate('header');
     
 </body>
 </html>
-<?php mysqli_close($db); ?>
