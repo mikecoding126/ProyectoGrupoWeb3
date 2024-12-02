@@ -139,7 +139,40 @@
         }
     }
 </style>
+<?php 
+if(isset($_GET['mensaje'])) {
+    if($_GET['mensaje'] === 'enviado') {
+        echo '<div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="mensajeAlerta">
+                ¡Mensaje enviado correctamente! Gracias por contactarnos.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+    } else if($_GET['mensaje'] === 'error') {
+        echo '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert" id="mensajeAlerta">
+                Hubo un error al enviar el mensaje. Por favor, intente nuevamente.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+    }
+}
+?>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var closeButton = document.querySelector('.btn-close');
+    var alert = document.getElementById('mensajeAlerta');
+
+    if(closeButton && alert) {
+       
+        closeButton.addEventListener('click', function() {
+            alert.style.display = 'none';
+        });
+
+        setTimeout(function() {
+            alert.style.display = 'none';
+        }, 5000);
+    }
+});
+</script>
 <section class="hero-banner">
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">

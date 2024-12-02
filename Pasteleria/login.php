@@ -173,12 +173,19 @@
         <div class="registro-link">
     <a href="admin/controlador/usuarioNuevo.php">¿No tienes cuenta? Regístrate aquí</a>
 </div>
-
+ 
 <div class="recuperar-link">
-    <a href="admin/controlador/usuarioModifica.php?cod=<?php echo isset($reg['id']) ? htmlspecialchars($reg['id']) : ''; ?>">
+    <a href="./contacto.php" onclick="contactarAdmin(); return true;">
         ¿Olvidaste tu contraseña?
     </a>
 </div>
+
+<script>
+function contactarAdmin() {
+    alert('Por favor contacta con el administrador para restablecer tu contraseña: adminPateleriaCollita@gmail.com');
+    
+}
+</script>
 </div>
             </body>
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2024 a las 22:22:42
+-- Tiempo de generación: 02-12-2024 a las 16:32:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -83,6 +83,44 @@ INSERT INTO `clientes` (`id`, `usuario_id`, `nombre`, `apellido`, `telefono`, `d
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `contacto`
+--
+
+CREATE TABLE `contacto` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `mensaje` text NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`id`, `nombre`, `apellido`, `correo`, `telefono`, `mensaje`, `fecha_registro`) VALUES
+(1, 'dcsd', 'sadcasd', 'ascas@dsv', '261', 'dcv', '2024-12-02 15:01:46'),
+(2, 'dcsd', 'sadcasd', 'ascas@dsv', '26162', 'dcv', '2024-12-02 15:03:44'),
+(3, 'cdzc', 'zdv', 'dzvz4dsv@dvsd', '614', 'zx dd ', '2024-12-02 15:04:49'),
+(4, 'dsv', 'v', 'sdv@asca', '1', 'sdv', '2024-12-02 15:05:35'),
+(5, 'dsv', 'v', 'sdv@asca', '1', 'sdv', '2024-12-02 15:10:33'),
+(6, 'dsv', 'v', 'sdv@asca', '1', 'sdv', '2024-12-02 15:13:43'),
+(7, 'dsvs', 'dsv', 'dsvsd@gmasc', '651', 'sdvsda', '2024-12-02 15:14:10'),
+(8, '1', '1', '1@2', '1', '1', '2024-12-02 15:17:09'),
+(9, '3', '3', '3@3', '3', '3', '2024-12-02 15:21:54'),
+(10, 'd', 'd', 'sdv@sdv', 'vsd', 'sdv', '2024-12-02 15:22:32'),
+(11, 'ds', 'dsv', 'dsv@gmail.com', '651', 'saca', '2024-12-02 15:24:46'),
+(12, 'dsv', 'sdv', 'sdv@asca', 'vds', 'svd', '2024-12-02 15:26:16'),
+(13, 'sc', 'acs', 'ascas@dsv', 'ca', 'cas', '2024-12-02 15:26:49'),
+(14, 'cvn', 'cfbc', 'dsvsd@gmail.com', 'dxv', 'xdv', '2024-12-02 15:27:52'),
+(15, 'cds', 'vsd', 'sdv@sdv', 'vds', 'sdv', '2024-12-02 15:30:08'),
+(16, 'vdsv', 'sdv', 'sdv@sdv', 'sdv', 'sdvsd', '2024-12-02 15:31:42');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `detalles_pedidos`
 --
 
@@ -110,7 +148,13 @@ INSERT INTO `detalles_pedidos` (`id`, `pedido_id`, `producto_id`, `cantidad`, `p
 (11, 31, 6, 2, 160.00),
 (12, 32, 3, 1, 168.00),
 (13, 33, 1, 1, 20.00),
-(14, 34, 3, 1, 168.00);
+(14, 34, 3, 1, 168.00),
+(15, 35, 3, 1, 168.00),
+(16, 36, 3, 1, 168.00),
+(17, 37, 1, 1, 20.00),
+(18, 37, 3, 1, 168.00),
+(19, 37, 4, 1, 180.00),
+(20, 37, 24, 1, 25.00);
 
 -- --------------------------------------------------------
 
@@ -157,18 +201,21 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `cliente_id`, `estado`, `fecha_pedido`, `fecha_entrega`, `direccion_envio`, `telefono`, `comentarios`) VALUES
-(23, 2, 'nuevo', '2024-11-18 11:32:06', NULL, 'Av Arce n2', '707007070', ''),
+(23, 2, 'enviado', '2024-11-18 11:32:06', '2024-12-02', 'Av Arce n2', '707007070', ''),
 (24, 2, 'enviado', '2024-11-18 11:33:36', '2024-11-18', 'Av Arce n2', '707007070', ''),
 (25, 2, 'enviado', '2024-11-18 11:34:53', '2024-11-18', 'Av Arce n2', '707007070', 'dcvs'),
-(26, 3, 'nuevo', '2024-11-18 11:46:37', NULL, 'Av. Juan de la Riva ', '70400560', 'ok'),
-(27, 3, 'nuevo', '2024-11-18 12:03:57', NULL, 'Av. Juan de la Riva ', '70400560', ''),
-(28, 3, 'nuevo', '2024-11-18 12:28:23', NULL, 'Av. Juan de la Riva ', '70400560', ''),
+(26, 3, 'enviado', '2024-11-18 11:46:37', '2024-12-02', 'Av. Juan de la Riva ', '70400560', 'ok'),
+(27, 3, 'enviado', '2024-11-18 12:03:57', '2024-12-02', 'Av. Juan de la Riva ', '70400560', ''),
+(28, 3, 'enviado', '2024-11-18 12:28:23', '2024-12-02', 'Av. Juan de la Riva ', '70400560', ''),
 (29, 3, 'nuevo', '2024-11-18 12:29:24', NULL, 'Av. Juan de la Riva ', '70400560', ''),
 (30, 3, 'enviado', '2024-11-18 12:34:35', '2024-11-18', 'Av. Juan de la Riva ', '70400560', ''),
 (31, 5, 'enviado', '2024-11-18 12:39:45', '2024-11-18', 'Av PanoramaN35', '60504070', ''),
 (32, 5, 'enviado', '2024-11-18 12:50:02', '2024-11-18', 'Av PanoramaN35', '60504070', ''),
 (33, 5, 'enviado', '2024-11-18 14:29:21', '2024-11-18', 'Av PanoramaN35', '60504070', 'lo mas rapido posible'),
-(34, 2, 'nuevo', '2024-11-18 15:07:28', NULL, 'Av Arce n2', '707007070', 'bueno');
+(34, 2, 'nuevo', '2024-11-18 15:07:28', NULL, 'Av Arce n2', '707007070', 'bueno'),
+(35, 2, 'enviado', '2024-11-27 21:28:18', '2024-12-02', 'Av Arce n2', '707007070', 'muy bueno'),
+(36, 5, 'enviado', '2024-11-30 21:39:11', '2024-12-02', 'Av PanoramaN35', '60504070', 'ok'),
+(37, 5, 'enviado', '2024-12-02 14:29:27', '2024-12-02', 'Av PanoramaN35', '60504070', 'buen servicio ');
 
 -- --------------------------------------------------------
 
@@ -195,10 +242,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo_producto`, `nombre`, `descripcion`, `categoria_id`, `precio`, `imagen`, `estado`, `stock`, `unidad_medida`, `proveedor_id`) VALUES
-(1, '123456', 'Tarta Crema Café', 'Base de café con crema pastelera infusionada en expresso, capas de bizcocho de chocolate con un toque de vainilla y decorada con caramelo salado y un suave glaseado de latte.', 1, 20.00, 'Tarta-CremaCafe.png', 'disponible', 95, 'unidades', 1),
+(1, '123456', 'Tarta Crema Café', 'Base de café con crema pastelera infusionada en expresso, capas de bizcocho de chocolate con un toque de vainilla y decorada con caramelo salado y un suave glaseado de latte.', 1, 20.00, 'Tarta-CremaCafe.png', 'disponible', 94, 'unidades', 1),
 (2, 'TART-002', 'Tarta Vainilla-Choco', 'Bizcocho de vainilla entrelazado con capas de chocolate, relleno de crema de frutilla y cubierto con una delicada capa de ganache de chocolate.', 2, 102.00, 'Tarta-VainillaChoco.png', 'nodisponible', 10, 'Unidad', 1),
-(3, 'TART-003', 'Tarta Cookies & Cream', 'Deliciosa combinación de bizcocho de chocolate relleno con una suave crema de galleta Oreo, cubierto con merengue italiano y ganache de chocolate, decorado con galletas Oreo.', 2, 168.00, 'Tarta-CookiesNcream.png', 'disponible', 7, 'Unidad', 1),
-(4, 'TART-004', 'Tarta Rosa Oscura', 'Bizcocho de chocolate esponjoso, con tres capas de crema de chocolate oscuro, decorado con pétalos de chocolate en forma de rosa. Para 12 personas.', 2, 180.00, 'Tarta-RosaOscura.png', 'disponible', 8, 'Unidad', 1),
+(3, 'TART-003', 'Tarta Cookies & Cream', 'Deliciosa combinación de bizcocho de chocolate relleno con una suave crema de galleta Oreo, cubierto con merengue italiano y ganache de chocolate, decorado con galletas Oreo.', 2, 168.00, 'Tarta-CookiesNcream.png', 'disponible', 4, 'Unidad', 1),
+(4, 'TART-004', 'Tarta Rosa Oscura', 'Bizcocho de chocolate esponjoso, con tres capas de crema de chocolate oscuro, decorado con pétalos de chocolate en forma de rosa. Para 12 personas.', 2, 180.00, 'Tarta-RosaOscura.png', 'disponible', 7, 'Unidad', 1),
 (5, 'PACK-001', 'Pack Fiesta Chico', 'Incluye 9 aperitivos: cuñape, empanada de pollo, empanada de queso, y empanada de carne.', 3, 58.00, 'Pack-FiestaChico.jpeg', 'disponible', 10, 'Pack', 1),
 (6, 'PACK-002', 'Pack Fiesta Grande', 'Incluye 24 aperitivos: cuñape, empanadas grandes de pollo, queso, y carne, acompañado de una gaseosa de 2 litros.', 3, 160.00, 'Pack-FiestaGrande.jpeg', 'nodisponible', 8, 'Pack', 1),
 (7, 'CUN-001', 'Cuñape Delicia', 'Cuñapes crocantes por unidad, perfectos para cualquier ocasión.', 4, 7.00, 'CuñapeDelicia.jpg', 'disponible', 49, 'Unidad', 1),
@@ -218,7 +265,7 @@ INSERT INTO `productos` (`id`, `codigo_producto`, `nombre`, `descripcion`, `cate
 (21, 'TART-012', 'Tarta de Nuez y Caramelo', 'Masa de nuez con un relleno de caramelo suave, decorada con nueces caramelizadas.', 2, 155.00, 'Tarta-NuezCaramelo.png', 'disponible', 10, 'Unidad', 1),
 (22, 'TART-013', 'Tarta Coco-Chocolate', 'Bizcocho de coco con capas de crema de chocolate y cubierto con una ganache de chocolate oscuro.', 2, 165.00, 'Tarta-CocoChoco.png', 'disponible', 10, 'Unidad', 1),
 (23, 'TART-014', 'Tarta de Pistacho', 'Bizcocho de pistacho con relleno de crema de pistacho y decorada con trozos de pistacho tostado.', 2, 175.00, 'Tarta-Pistacho.png', 'disponible', 10, 'Unidad', 1),
-(24, 'MINI-001', 'Mini Tartaleta de Limón', 'Tartaleta individual con base de masa quebrada y relleno de crema de limón, decorada con merengue.', 1, 25.00, 'Mini-TartaletaLimon.png', 'disponible', 30, 'Unidad', 1),
+(24, 'MINI-001', 'Mini Tartaleta de Limón', 'Tartaleta individual con base de masa quebrada y relleno de crema de limón, decorada con merengue.', 1, 25.00, 'Mini-TartaletaLimon.png', 'disponible', 29, 'Unidad', 1),
 (25, 'MINI-002', 'Mini Tartaleta de Frutos Rojos', 'Base de masa quebrada con crema pastelera y decorada con una mezcla de frutos rojos frescos.', 1, 28.00, 'Mini-TartaletaFrutosRojos.png', 'disponible', 30, 'Unidad', 1),
 (26, 'TART-015', 'Tarta de Almendra y Chocolate', 'Bizcocho de almendra con capas de crema de chocolate y decorada con almendras caramelizadas.', 2, 170.00, 'Tarta-AlmendraChoco.png', 'disponible', 10, 'Unidad', 1),
 (27, 'TART-016', 'Tarta Tres Leches', 'Bizcocho esponjoso empapado en una mezcla de tres leches, cubierto con crema batida y decorado con canela en polvo.', 2, 160.00, 'Tarta-TresLeches.png', 'disponible', 10, 'Unidad', 1),
@@ -359,6 +406,12 @@ ALTER TABLE `clientes`
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
+-- Indices de la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `detalles_pedidos`
 --
 ALTER TABLE `detalles_pedidos`
@@ -426,10 +479,16 @@ ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT de la tabla `detalles_pedidos`
 --
 ALTER TABLE `detalles_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -441,7 +500,7 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

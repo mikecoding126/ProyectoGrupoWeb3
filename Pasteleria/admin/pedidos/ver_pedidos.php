@@ -1,14 +1,16 @@
 <?php
-    session_start();
-    $auth = $_SESSION['login'];
-    if(!$auth){
-        header("Location:/pasteleria");
-    }
+
+ob_start();
+session_start();
+$auth = $_SESSION['login'];
+if (!$auth) {
+    header("Location:/pasteleria");
+}
     require '../../includes/config/database.php';
     $db = conectarDB();
 
     require '../../includes/funciones.php';
-    incluirTemplate('header');
+    incluirTemplate('Header');
 
 
 // Procesar la actualización del estado si se recibe una solicitud
@@ -22,7 +24,7 @@ if (isset($_POST['actualizar_estado'])) {
     mysqli_stmt_bind_param($stmt, "ssi", $nuevoEstado, $fechaEntrega, $idPedido);
     
     if (mysqli_stmt_execute($stmt)) {
-        header("Location: " . $_SERVER['PHP_SELF']);
+        header("Location: /ProyectoGrupoWeb3/Pasteleria/admin/pedidos/ver_pedidos.php");
         exit;
     }
 }

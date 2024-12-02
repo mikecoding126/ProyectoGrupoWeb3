@@ -30,7 +30,7 @@
       require('includes/funciones.php');
       incluirTemplate('header');
       require 'includes/config/database.php';
-      $db=conectarDB(); 
+$db = conectarDB();
     ?>
         <section id="id" class="container mt-4 text-center">
                 <div class="p-3 mb-2 bg-light text-dark background-image">
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <form action="admin/contacto/contactoRegistro.php" method="post" class="formulario" enctype="multipart/form-data">
+        <form action="contactoRegistro.php" method="post" class="formulario" enctype="multipart/form-data">
             <div class="input-formulario">
                 <label for="nombre">Nombre</label>
                 <input type="text" placeholder="Pedro"  name="nom" id="nom">
